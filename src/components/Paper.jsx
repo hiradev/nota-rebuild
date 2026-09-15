@@ -8,7 +8,7 @@ const SLIDES = [
   {
     id: 1,
     image: "/images/paper-slide-1.webp",
-    heading: "Special paper",
+    heading: "We use special paper with a nearly invisible pattern",
     body: "For the pen, it's a precise map.",
   },
   {
@@ -20,13 +20,13 @@ const SLIDES = [
   {
     id: 3,
     image: "/images/paper-slide-3.webp",
-    heading: "No delays, no glitches",
+    heading: "No delays. No glitches. No random effects.",
     body: "AI-powered structure.",
   },
   {
     id: 4,
     image: "/images/paper-slide-4.webp",
-    heading: "Real-time sync",
+    heading: "Everything you write is synced to your phone in real time",
     body: "Your notes. Already there.",
   },
 ];
@@ -42,7 +42,11 @@ export default function Paper() {
   useEffect(() => {
     const { gsap, ScrollTrigger } = ensureGsap();
     const ctx = gsap.context(() => {
-      // Six-column wipe revealing the section under the white cover
+      // Six-column wipe revealing the section under the black cover. Both
+      // the cover and curtains stay black (not white) - per the reference
+      // audit this carousel continues on a black background the whole way
+      // through and only flips to white after it hands off to the next
+      // section.
       const curtains = curtainsRef.current.querySelectorAll(
         ".paper__curtain"
       );
@@ -62,7 +66,7 @@ export default function Paper() {
         }
       );
 
-      // White cover dissolves away
+      // Black cover dissolves away
       gsap.fromTo(
         coverRef.current,
         { autoAlpha: 1 },
@@ -83,6 +87,12 @@ export default function Paper() {
       const bandStart = 0.2;
       const bandEnd = 0.95;
       const perSlide = (bandEnd - bandStart) / (SLIDES.length - 1);
+
+      const setActiveDot = (index) => {
+        dotsRef.current.forEach((d, di) =>
+          d?.classList.toggle("paper__pagination-item--active", di === index)
+        );
+      };
 
       SLIDES.slice(1).forEach((slide, i) => {
         const start = bandStart + i * perSlide;
@@ -124,12 +134,12 @@ export default function Paper() {
           scrub: true,
           onToggle: (self) => {
             if (self.isActive) {
-              dotsRef.current.forEach((d, di) =>
-                d?.classList.toggle(
-                  "paper__pagination-item--active",
-                  di === i + 1
-                )
-              );
+              // Entering this frame's band (either scroll direction).
+              setActiveDot(i + 1);
+            } else if (self.direction === -1) {
+              // Scrolled back up past this frame's start: restore the
+              // previous frame's dot instead of leaving this one lit.
+              setActiveDot(i);
             }
           },
         });
@@ -196,9 +206,9 @@ export default function Paper() {
           ))}
         </div>
 
-        <div className="paper__cover bc--main-white" ref={coverRef}>
+        <div className="paper__cover bc--main-black" ref={coverRef}>
           <h2 className="page__heading headline--2 tc--gray">Works with</h2>
-          <h2 className="page__heading headline--2 tc--main-black">
+          <h2 className="page__heading headline--2 tc--main-white">
             smart paper
           </h2>
         </div>

@@ -6,8 +6,9 @@ export default function Footer() {
           <div className="footer__content">
             <div className="footer__content-top">
               <p className="footer-text footer__description tc--main-white">
-                A pen for people who think in ink first, pixels second —
-                built to keep up with both.
+                NŌTA creates tools that respect the way people think and write.
+                <br />
+                Natural handwriting, quietly connected to digital structure.
               </p>
               <div className="footer__info-wrapper">
                 <div className="footer__menu">
@@ -21,11 +22,11 @@ export default function Footer() {
                     <a href="#who" className="footer-link--white">
                       Who it&apos;s for
                     </a>
-                    <a href="#colors" className="footer-link--white">
-                      Colors
+                    <a href="#about" className="footer-link--white">
+                      About
                     </a>
-                    <a href="#order" className="footer-link--white">
-                      Order
+                    <a href="#inside" className="footer-link--white">
+                      Inside the box
                     </a>
                   </div>
                 </div>
@@ -51,11 +52,29 @@ export default function Footer() {
                   </a>
                 </div>
                 <div className="footer__design-team menu-link tc--main-white-50">
-                  <a href="#" className="footer-link--gray">
-                    Design
+                  <a
+                    href="https://taptop.pro/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-link--gray"
+                  >
+                    Made in Taptop
                   </a>
-                  <a href="#" className="footer-link--gray">
-                    Development
+                  <a
+                    href="https://www.behance.net/alicem"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-link--gray"
+                  >
+                    Designed by Alice
+                  </a>
+                  <a
+                    href="https://www.uprock.ru/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-link--gray"
+                  >
+                    &amp; UPROCK Studio
                   </a>
                 </div>
               </div>

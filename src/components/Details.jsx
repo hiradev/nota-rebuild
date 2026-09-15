@@ -92,8 +92,8 @@ export default function Details() {
             </div>
             <RevealCard
               className="details__card--right"
-              label="Pen colorway lineup"
-              caption="Refined colors. Personal expression"
+              label="USB-C adapter, macro"
+              caption="USB-C adapter — fast charging"
             />
           </div>
 
@@ -121,6 +121,7 @@ export default function Details() {
             <RevealCard
               className="details__card--top-pill"
               label="Cap detail"
+              caption="Bluetooth connectivity, up to 8 hours of active use"
             />
           </div>
         </div>

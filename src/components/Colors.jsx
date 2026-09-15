@@ -21,6 +21,28 @@ export default function Colors() {
     const { gsap, ScrollTrigger } = ensureGsap();
     const ctx = gsap.context(() => {
       const perSlide = 1 / COLORS.length;
+
+      // Dot 1 (silver) has no fromTo tween since it's visible by default,
+      // but it still needs its own ScrollTrigger zone so the pagination
+      // resets to it when scrolling back up from dot 2 (graphite).
+      // Without this, onToggle only ever fires for zones 2-5, and since
+      // those only act "on enter" (isActive === true) and no-op "on
+      // leave", scrolling back past the dot-2 zone's start left dot 2
+      // stuck active with nothing re-activating dot 1.
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "0% top",
+        end: `${perSlide * 100}% top`,
+        scrub: true,
+        onToggle: (self) => {
+          if (self.isActive) {
+            dotsRef.current.forEach((d, di) =>
+              d?.classList.toggle("pagination-dot--active", di === 0)
+            );
+          }
+        },
+      });
+
       COLORS.slice(1).forEach((c, i) => {
         const idx = i + 1;
         const start = idx * perSlide;

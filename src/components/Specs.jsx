@@ -28,7 +28,7 @@ const CARDS = [
     rows: [
       "Notes sync automatically",
       "Searchable over time",
-      "Structured with ai support",
+      "Structured with AI support",
       "Ready when you return",
     ],
   },

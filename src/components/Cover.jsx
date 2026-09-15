@@ -133,11 +133,15 @@ export default function Cover() {
         </div>
         <div className="cover__wrapper">
           <div className="cover__headline-wrapper">
-            <h1 className="headline--1 tc--main-white" ref={line1Ref}>
-              {LINE_1}
+            <h1 className="headline--1 tc--main-white" aria-label={LINE_1}>
+              <span ref={line1Ref} aria-hidden="true">
+                {LINE_1}
+              </span>
             </h1>
-            <h1 className="headline--1 tc--main-white" ref={line2Ref}>
-              {LINE_2}
+            <h1 className="headline--1 tc--main-white" aria-label={LINE_2}>
+              <span ref={line2Ref} aria-hidden="true">
+                {LINE_2}
+              </span>
             </h1>
           </div>
         </div>

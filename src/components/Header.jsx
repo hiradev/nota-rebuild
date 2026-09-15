@@ -1,4 +1,67 @@
+"use client";
+
+import { useEffect, useId, useRef, useState } from "react";
+
 export default function Header() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const panelRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const triggerRef = useRef(null);
+  const headingId = useId();
+
+  // Moves focus into the dialog on open, restores it to the trigger on
+  // close, and wires Escape-to-dismiss + a Tab focus trap while it's open.
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    closeButtonRef.current?.focus();
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setIsModalOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab" || !panelRef.current) return;
+
+      const focusable = panelRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isModalOpen]);
+
+  function openModal(event) {
+    triggerRef.current = event.currentTarget;
+    setIsModalOpen(true);
+  }
+
+  function closeModal() {
+    setIsModalOpen(false);
+    triggerRef.current?.focus();
+  }
+
+  function handleSubmit(event) {
+    // Marketing-site rebuild — no real waitlist backend to submit to.
+    event.preventDefault();
+    closeModal();
+  }
+
   return (
     <header className="header">
       <div className="container--primary">
@@ -9,6 +72,14 @@ export default function Header() {
                 <path d="M4.26969 7.45499H3.91969V24.99H-0.000313967V0.55999H5.63469L12.0397 18.095H12.3897V0.55999H16.3097V24.99H10.6747L4.26969 7.45499ZM20.776 -1.13845e-05H31.206V3.21999H20.776V-1.13845e-05ZM25.991 25.41C24.6143 25.41 23.3777 25.1883 22.281 24.745C21.2077 24.3017 20.286 23.6717 19.516 22.855C18.7693 22.0383 18.186 21.0467 17.766 19.88C17.3693 18.7133 17.171 17.4067 17.171 15.96C17.171 14.5133 17.3693 13.2067 17.766 12.04C18.186 10.8733 18.7693 9.88166 19.516 9.06499C20.286 8.24832 21.2077 7.61832 22.281 7.17499C23.3777 6.73166 24.6143 6.50999 25.991 6.50999C27.3443 6.50999 28.5693 6.73166 29.666 7.17499C30.7627 7.61832 31.6843 8.24832 32.431 9.06499C33.201 9.88166 33.7843 10.8733 34.181 12.04C34.601 13.2067 34.811 14.5133 34.811 15.96C34.811 17.4067 34.601 18.7133 34.181 19.88C33.7843 21.0467 33.201 22.0383 32.431 22.855C31.6843 23.6717 30.7627 24.3017 29.666 24.745C28.5693 25.1883 27.3443 25.41 25.991 25.41ZM25.991 21.98C27.2743 21.98 28.2893 21.595 29.036 20.825C29.7827 20.0317 30.156 18.8767 30.156 17.36V14.56C30.156 13.0433 29.7827 11.9 29.036 11.13C28.2893 10.3367 27.2743 9.93999 25.991 9.93999C24.7077 9.93999 23.6927 10.3367 22.946 11.13C22.1993 11.9 21.826 13.0433 21.826 14.56V17.36C21.826 18.8767 22.1993 20.0317 22.946 20.825C23.6927 21.595 24.7077 21.98 25.991 21.98ZM45.0523 24.99C43.3257 24.99 42.054 24.535 41.2373 23.625C40.4207 22.715 40.0123 21.5367 40.0123 20.09V10.465H34.7623V6.92999H38.3323C39.0557 6.92999 39.569 6.78999 39.8723 6.50999C40.1757 6.20666 40.3273 5.68166 40.3273 4.93499V0.55999H44.4923V6.92999H51.8423V10.465H44.4923V21.455H51.8423V24.99H45.0523ZM68.3137 24.99C67.217 24.99 66.3653 24.7217 65.7587 24.185C65.1753 23.625 64.8253 22.855 64.7087 21.875H64.5337C64.207 22.995 63.5653 23.87 62.6087 24.5C61.652 25.1067 60.4737 25.41 59.0737 25.41C57.2537 25.41 55.807 24.9317 54.7337 23.975C53.6603 23.0183 53.1237 21.6883 53.1237 19.985C53.1237 16.345 55.7953 14.525 61.1387 14.525H64.3237V13.335C64.3237 12.1917 64.0437 11.3283 63.4837 10.745C62.9237 10.1617 62.0137 9.86999 60.7537 9.86999C59.6103 9.86999 58.6887 10.0917 57.9887 10.535C57.2887 10.9783 56.6937 11.55 56.2037 12.25L53.6487 10.08C54.2087 9.07666 55.107 8.23666 56.3437 7.55999C57.6037 6.85999 59.2253 6.50999 61.2087 6.50999C63.5887 6.50999 65.4437 7.06999 66.7737 8.18999C68.127 9.28666 68.8037 10.9317 68.8037 13.125V21.63H70.9387V24.99H68.3137ZM60.5787 22.33C61.652 22.33 62.5387 22.085 63.2387 21.595C63.962 21.0817 64.3237 20.3933 64.3237 19.53V17.115H61.2437C58.7937 17.115 57.5687 17.885 57.5687 19.425V20.125C57.5687 20.8483 57.837 21.3967 58.3737 21.77C58.9103 22.1433 59.6453 22.33 60.5787 22.33Z" fill="currentColor" />
               </svg>
             </a>
+            {/*
+              Audit check (Task 2): the live site splits this nav text into
+              one <span> per letter for a reveal animation with no
+              accessible-name fallback, so screen readers hear a garbled,
+              duplicated jumble instead of "Specifications". This rebuild
+              renders plain, unsplit link text here on purpose — do not
+              add a per-character split/animation to these links.
+            */}
             <nav className="header__nav menu-link tc--main-white">
               <a href="#specs">Specifications</a>
               <a href="#who">Who it&apos;s for</a>
@@ -20,15 +91,70 @@ export default function Header() {
             <span className="header__order-icon" aria-hidden="true">
               <img src="/images/logo-mark.svg" alt="" width="16" height="17" />
             </span>
-            <a href="#order" className="header__order-cta button-title">
+            <button
+              type="button"
+              className="header__order-cta button-title"
+              onClick={openModal}
+            >
               <span className="header__order-cta-order">Order</span>{" "}
               <span className="header__order-cta-product">Nota One</span>
               <span className="header__order-dot" aria-hidden="true" />
               <span className="header__order-price">$300</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>
+
+      {isModalOpen ? (
+        <div className="stay-ahead-modal">
+          <button
+            type="button"
+            className="stay-ahead-modal__overlay"
+            aria-label="Close dialog"
+            onClick={closeModal}
+          />
+          <div
+            className="stay-ahead-modal__panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={headingId}
+            ref={panelRef}
+          >
+            <button
+              type="button"
+              className="stay-ahead-modal__close"
+              aria-label="Close"
+              onClick={closeModal}
+              ref={closeButtonRef}
+            >
+              &times;
+            </button>
+            <h2 id={headingId} className="stay-ahead-modal__heading headline--4 serif">
+              Stay ahead
+            </h2>
+            <p className="stay-ahead-modal__body main-text">
+              Launching soon. Get early access and insider updates.
+            </p>
+            <form className="stay-ahead-modal__form" onSubmit={handleSubmit}>
+              <label htmlFor="stay-ahead-email" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="stay-ahead-email"
+                name="email"
+                type="email"
+                placeholder="Email address"
+                autoComplete="email"
+                required
+                className="stay-ahead-modal__input"
+              />
+              <button type="submit" className="stay-ahead-modal__submit button-title">
+                Notify me
+              </button>
+            </form>
+          </div>
+        </div>
+      ) : null}
     </header>
   );
 }

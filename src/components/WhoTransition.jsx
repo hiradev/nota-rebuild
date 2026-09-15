@@ -26,7 +26,7 @@ export default function WhoTransition() {
           stagger: { each: 0.15, from: "end" },
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top top-=150%",
+            start: "top top-=20%",
             end: "+=90%",
             scrub: true,
           },

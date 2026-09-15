@@ -401,3 +401,133 @@ button {
   .desktop-experience { display: none; }
   .static-experience { display: block; }
 }
+
+/* -------------------------------------------------------------------------
+   Accessibility utility
+   ------------------------------------------------------------------------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* -------------------------------------------------------------------------
+   "Stay ahead" order-CTA modal (Header)
+   ------------------------------------------------------------------------- */
+
+.stay-ahead-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vw;
+}
+
+.stay-ahead-modal__overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--black-40);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.stay-ahead-modal__panel {
+  position: relative;
+  width: min(420px, 100%);
+  background: var(--main-black);
+  color: var(--main-white);
+  border: 1px solid var(--white-20);
+  border-radius: var(--radius-flat);
+  padding: 2.5vw 2vw;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1vw;
+}
+
+.stay-ahead-modal__close {
+  position: absolute;
+  top: 0.8vw;
+  right: 0.8vw;
+  width: 2vw;
+  min-width: 28px;
+  height: 2vw;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--main-white);
+}
+
+.stay-ahead-modal__heading {
+  padding-right: 2vw;
+}
+
+.stay-ahead-modal__body {
+  color: var(--white-55);
+}
+
+.stay-ahead-modal__form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8vw;
+  margin-top: 0.5vw;
+}
+
+.stay-ahead-modal__input {
+  flex: 1 1 200px;
+  background: var(--white-5);
+  border: 1px solid var(--white-20);
+  border-radius: var(--radius-flat);
+  padding: 0.8vw 1vw;
+  color: var(--main-white);
+  font: inherit;
+}
+
+.stay-ahead-modal__input::placeholder {
+  color: var(--white-40);
+}
+
+.stay-ahead-modal__submit {
+  background: var(--main-white);
+  color: var(--main-black);
+  border-radius: 100vw;
+  padding: 0.8vw 1.6vw;
+  white-space: nowrap;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.stay-ahead-modal__submit:hover {
+  background: var(--accent);
+  color: var(--main-white);
+}
+
+@media (max-width: 767px) {
+  .stay-ahead-modal__panel {
+    padding: 6vw 5vw;
+    row-gap: 3vw;
+  }
+  .stay-ahead-modal__input,
+  .stay-ahead-modal__submit {
+    padding: 3vw 4vw;
+  }
+  .stay-ahead-modal__close {
+    top: 3vw;
+    right: 3vw;
+    width: 8vw;
+    height: 8vw;
+  }
+}

@@ -74,9 +74,9 @@ export default function Inside() {
         <div className="inside__complete-wrapper">
           <BlindsItem
             image="/images/blinds-1.webp"
-            alt="Full kit — pen, adapter, charging dock, spare nibs"
-            title="Everything you need, nothing you don't"
-            body="One box: the pen, a charging dock, three spare nibs, and a quick-start card."
+            alt="Full kit — pen, notepad, charging cable, and instructions"
+            title="A complete, ready-to-use set"
+            body="Everything in one box: the pen, a notepad, a charging cable, and instructions — ready to write from day one."
           />
         </div>
 
