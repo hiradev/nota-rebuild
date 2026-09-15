@@ -1,0 +1,916 @@
+/* =========================================================================
+   NOTA — Section architecture
+   The "camera" scroll system: tall tracks containing a 100vh sticky camera,
+   stitched together with negative margins so scenes overlap/cross-fade.
+   Track map (desktop, >=992px only — see .desktop-experience in globals.css)
+   ========================================================================= */
+
+.black-bg__wrapper {
+  position: relative;
+  background: #000;
+}
+
+/* ---------- 0. Preloader ---------- */
+.preload {
+  position: absolute;
+  inset: 0;
+  height: 100vh;
+  z-index: 110;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.preload__counter {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Header ---------- */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+}
+.header__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 1.51vw;
+}
+.header__links {
+  display: flex;
+  align-items: center;
+  column-gap: 3.02vw;
+}
+.header__wordmark {
+  display: flex;
+  align-items: center;
+  color: var(--main-white);
+}
+.header__wordmark svg {
+  width: 3.69vw;
+  min-width: 44px;
+  height: auto;
+  display: block;
+}
+.header__nav {
+  display: flex;
+  column-gap: 2.02vw;
+}
+.header__nav a {
+  position: relative;
+  padding-bottom: 0.2vw;
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease, opacity 200ms ease;
+}
+.header__nav a:hover {
+  border-bottom-color: currentColor;
+}
+.header__cta {
+  padding: 0.7vw 1.5vw;
+  border-radius: var(--radius-flat);
+  background: var(--main-white);
+  color: var(--main-black);
+  transition: background 200ms ease;
+}
+.header__cta:hover {
+  background: var(--accent);
+  color: var(--main-white);
+}
+.header__order {
+  display: flex;
+  align-items: center;
+  column-gap: 1.11vw;
+  background: var(--main-white);
+  border-radius: 100vw;
+  padding: 0.56vw 0.56vw 0.56vw 1.67vw;
+}
+.header__order-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header__order-icon img {
+  display: block;
+  width: 0.83vw;
+  min-width: 12px;
+  height: auto;
+}
+.header__order-cta {
+  display: flex;
+  align-items: center;
+  column-gap: 0.42vw;
+  background: color-mix(in srgb, var(--accent) 22%, black);
+  color: var(--main-white);
+  border-radius: 100vw;
+  padding: 0.83vw 1.39vw;
+  font-size: 0.83vw;
+  white-space: nowrap;
+  transition: background 200ms ease;
+}
+.header__order-cta:hover {
+  background: var(--accent);
+}
+.header__order-cta-product {
+  color: var(--white-50);
+}
+.header__order-dot {
+  width: 0.28vw;
+  height: 0.28vw;
+  min-width: 3px;
+  min-height: 3px;
+  border-radius: 50%;
+  background: var(--white-50);
+}
+
+/* ---------- 1. Cover / Hero ---------- */
+.cover {
+  height: 270vh;
+  position: sticky;
+  top: -170vh;
+}
+.cover__camera {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  background: var(--main-radial);
+}
+.cover__lottie-pen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale3d(1.28, 1.28, 1);
+}
+.cover__lottie-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.cover__lottie-canvas svg {
+  display: block;
+}
+.cover__wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 var(--container-pad) 2.02vw;
+}
+.cover__headline-wrapper {
+  height: 16.63vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  width: 100%;
+}
+.cover__headline-wrapper h1 {
+  min-height: 1em;
+}
+
+/* ---------- 2. Specs transition ---------- */
+.transition-specs {
+  height: 180vh;
+  position: sticky;
+  top: 0;
+}
+.transition-specs__camera {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+}
+.transition-specs__black-bg {
+  position: absolute;
+  inset: 0;
+  background: #000;
+}
+.transition-specs__curtains-wrapper {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+.transition-specs__curtain {
+  background: var(--main-white);
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  /* No static transform here — GSAP's fromTo({yPercent:100}, ...) sets the
+     initial hidden position via its own inline transform. A static CSS
+     transform on this selector composites with (doesn't replace) GSAP's
+     translate(), leaving curtains visually stuck ~800px offset regardless
+     of the correctly-animating yPercent value. */
+}
+
+/* ---------- 3. Specifications ---------- */
+.specs {
+  height: 300vh;
+  position: sticky;
+  top: -200vh;
+}
+.specs__camera {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+}
+.specs__content {
+  height: 100%;
+  background: var(--main-white);
+  color: var(--main-black);
+  padding-top: 5.6vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+@media (min-width: 1440px) {
+  .specs__content {
+    padding-top: 5.56vw;
+  }
+}
+@media (min-width: 1920px) {
+  .specs__content {
+    padding-top: 6.25vw;
+    padding-right: 2.08vw;
+    padding-left: 2.08vw;
+  }
+}
+.specs__content-text-wrapper {
+  height: 16.63vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+@media (min-width: 1440px) {
+  .specs__content-text-wrapper {
+    height: 11.46vw;
+  }
+}
+@media (min-width: 1920px) {
+  .specs__content-text-wrapper {
+    height: 8.59vw;
+  }
+}
+.specs-content__img-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.specs__content--img {
+  height: 71.12vh;
+  width: auto;
+}
+@media (min-width: 1440px) {
+  .specs__content--img {
+    height: 66.04vh;
+  }
+}
+@media (min-width: 1920px) {
+  .specs__content--img {
+    height: 67.96vh;
+  }
+}
+.specs-pack__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 1.01vw;
+  padding: 0 3.63vw 12.67vh;
+}
+@media (min-width: 1440px) {
+  .specs-pack__list {
+    column-gap: 1.39vw;
+    padding: 0 6.94vw 6.6vw;
+  }
+}
+@media (min-width: 1920px) {
+  .specs-pack__list {
+    column-gap: 2.08vw;
+    padding: 0 12.24vw 10.1vw;
+  }
+}
+.specs-list__card {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1px;
+}
+.specs-card__top-content {
+  padding: 2.67vh 1.92vw;
+  border-radius: 1.21vw;
+}
+.specs-card__bottom-content {
+  padding: 2.67vh 1.92vw;
+  border-radius: 1.21vw;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.91vw;
+}
+.specs-card__bottom-info {
+  padding-bottom: 0.91vw;
+  border-bottom: 1px solid var(--black-10);
+}
+.specs-card__bottom-info--last {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.specs-card__bottom-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.specs-card__bottom-dot {
+  width: 0.81vw;
+  height: 0.81vw;
+  border-radius: 50%;
+  flex: none;
+}
+
+/* ---------- 4. Who transition ---------- */
+.who-transition {
+  height: 180vh;
+  margin-top: -70vh;
+  position: relative;
+}
+.who-transition__camera {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+}
+.who-transition__curtains-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  height: 100%;
+  grid-template-rows: 1fr 2.625fr 2.625fr 2.625fr;
+}
+.who-transition__curtain--top,
+.who-transition__curtain {
+  height: 100%;
+  width: 0%;
+  background: var(--main-black);
+}
+
+/* ---------- 5. Who it's for ---------- */
+.who {
+  position: sticky;
+  top: -300vh;
+  margin-top: -100vh;
+  background: #000;
+}
+.who__text-content {
+  height: 180vh;
+  position: relative;
+}
+.who__text-camera {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.who__text-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.02vw;
+  width: 100%;
+}
+.who__text1-wrapper {
+  border-bottom: 1px solid var(--white-20);
+  padding-bottom: 2.02vw;
+}
+.who__text1 {
+  display: block;
+}
+.who__text1-child {
+  transition: color 0.15s linear;
+}
+.who__text2-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.who__descriptor-wrapper {
+  max-width: 68.55vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 0.4vw;
+}
+
+.who__theses-content {
+  position: relative;
+}
+.who__theses-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 1.51vw;
+  margin-top: 3.73vw;
+  overflow: hidden;
+  padding: 0 2.32vw;
+  margin-left: -2.02vw;
+  margin-right: -2.02vw;
+}
+.thesis__content {
+  width: 43.35vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 0.6vw;
+  text-align: right;
+}
+.thesis__content p {
+  width: 34.88vw;
+  max-width: 100%;
+}
+
+.who__video-content {
+  height: 180vh;
+  position: relative;
+}
+.who__video-camera {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.who__video,
+.who__video-placeholder {
+  height: 46.57vw;
+  width: 100%;
+  object-fit: cover;
+  transform-origin: 100% 0%;
+}
+
+/* ---------- 6. Paper ---------- */
+.paper {
+  height: 600vh;
+  position: sticky;
+  top: 0;
+}
+.paper__camera {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+}
+.paper__slide {
+  position: absolute;
+  inset: 0;
+}
+.paper__image,
+.paper__image-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.paper__slide-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4.03vw var(--container-pad);
+}
+.paper__heading {
+  align-self: flex-start;
+}
+.paper__description {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1px;
+}
+.paper__plate {
+  padding: 2.02vw;
+  border-radius: 1.61vw;
+  width: 32.26vw;
+  max-width: 90vw;
+}
+.paper__pagination {
+  position: absolute;
+  bottom: 2.02vw;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  column-gap: 0.5vw;
+  z-index: 5;
+}
+.paper__pagination-item {
+  width: 8.06vw;
+  height: 0.2vw;
+  background: rgba(255, 255, 255, 0.4);
+}
+.paper__pagination-item--active {
+  background: var(--main-white);
+}
+.paper__cover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+.paper__curtains {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  z-index: 4;
+}
+.paper__curtain {
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  height: 0vh;
+  align-self: start;
+  background: var(--main-white);
+}
+.paper__curtain--last {
+  border-right-color: transparent;
+}
+
+/* ---------- 7. Inside transition ---------- */
+.inside__transition {
+  height: 230vh;
+  margin-top: -100vh;
+  position: relative;
+}
+.inside__transition-camera {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+.inside__transition-circle {
+  width: 40.32vw;
+  height: 40.32vw;
+  border-radius: 50.4vw;
+  transform: scale3d(0, 0, 0);
+}
+.inside__title-wrapper {
+  position: absolute;
+  inset: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  text-align: center;
+}
+
+/* ---------- 8. Inside the box ---------- */
+.inside {
+  background: var(--main-white);
+  color: var(--main-black);
+}
+.inside__complete-wrapper {
+  height: 100vh;
+  padding: 2.02vw 0;
+}
+.inside__text-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.inside__text--animation {
+  font-family: var(--font-instrument-serif), serif;
+  font-size: 4.4vw;
+  line-height: 112%;
+  max-width: 95vw;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+.inside__device-wrapper {
+  height: 100vh;
+  display: flex;
+  column-gap: 2.02vw;
+}
+.inside__device-wrapper .inside__blinds-item {
+  width: 50%;
+}
+
+.inside__blinds-item {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  padding: 2.02vw 2.02vw 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.inside__blinds-image,
+.inside__blinds-image-placeholder {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: all 200ms linear;
+}
+.inside__blinds-image--hover {
+  opacity: 0;
+  z-index: 1;
+}
+.inside__blinds-item:hover .inside__blinds-image--hover {
+  opacity: 1;
+}
+.inside__blinds-blinds {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-rows: repeat(25, 1fr);
+}
+.inside__blind {
+  height: 100%;
+  background: #fff;
+  transform-origin: center;
+}
+.inside__blinds-content {
+  position: relative;
+  z-index: 10;
+  max-width: 36.29vw;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.01vw;
+}
+.inside__blinds-text {
+  margin-left: 6.05vw;
+}
+
+/* ---------- 9. Details ---------- */
+.details {
+  background: #000;
+}
+.details__wrapper {
+  padding: 2.02vw 0;
+  display: flex;
+  flex-direction: column;
+}
+.details__content-wrapper--center,
+.details__content-wrapper--top {
+  display: flex;
+  column-gap: 2.02vw;
+}
+.details__content-wrapper--center {
+  align-items: center;
+}
+.details__content-wrapper--top {
+  align-items: flex-start;
+}
+.details__cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.02vw;
+  align-items: flex-end;
+  width: 48.99vw;
+}
+.details__card {
+  position: relative;
+  overflow: hidden;
+  flex: none;
+}
+.details__card--tall { width: 100%; height: 58.17vw; }
+.details__card--pill-sm { width: 19.35vw; height: 23.49vw; border-radius: 6.05vw; }
+.details__card--right { width: 59.27vw; height: 44.96vw; border-radius: 15.12vw; }
+.details__card--top-large { width: 66.94vw; height: 71.47vw; }
+.details__card--top-pill { width: 31.25vw; height: 22.48vw; border-radius: 6.05vw; }
+.details__card-image,
+.details__card-image-placeholder {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+.details__text-wrapper {
+  position: absolute;
+  left: 1.6vw;
+  bottom: 1.6vw;
+  padding: 1.6vw 2.42vw;
+  border-radius: 10.08vw;
+  z-index: 3;
+}
+.details__video-wrapper {
+  height: 100vh;
+  padding: 2.02vw 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.details__video-content {
+  position: relative;
+  overflow: hidden;
+  border-radius: 30.24vw;
+  width: 100%;
+  height: 100%;
+}
+.details__video,
+.details__video-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- 10. Colours ---------- */
+.section-colors {
+  height: 350vh;
+  position: sticky;
+  top: 0;
+}
+.section-colors__camera {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  background: #000;
+}
+.section-colors__wrapper {
+  position: absolute;
+  inset: 0;
+  height: 100vh;
+  padding-top: 44.4vh;
+}
+.section-colors__image,
+.section-colors__image-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.section-colors__content-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--container-pad);
+}
+.section-colors__text-wrapper2 {
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+}
+.section-colors__paginations-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 4.03vw;
+  display: flex;
+  column-gap: 0.5vw;
+  z-index: 5;
+}
+.pagination-dot {
+  width: 8.06vw;
+  height: 0.2vw;
+  border-radius: 100.81vw;
+  opacity: 0.4;
+}
+.pagination-dot--active {
+  opacity: 1;
+}
+
+/* ---------- 11. Footer ---------- */
+/* Not sticky: the previous section (.section-colors) is already the
+   pinned "camera," so footer only needs to sit in normal flow right
+   after it. A sticky/bottom rule here (no top) rendered the footer at
+   the top of the whole page in Chromium once sibling sticky sections
+   started pinning correctly — same class of bug as .cover below. */
+.footer {
+  position: relative;
+  z-index: 1;
+}
+.scroll-wrapper {
+  background: linear-gradient(180deg, #000 0%, #050505 100%);
+}
+.footer__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4.03vw 0 2.02vw;
+  height: 31.35vw;
+  min-height: 420px;
+}
+.footer__content-top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2vw;
+}
+.footer__description {
+  max-width: 39.31vw;
+}
+.footer__info-wrapper {
+  display: flex;
+  column-gap: 5vw;
+}
+.footer__menu,
+.footer__year {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.9vw;
+}
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5vw;
+}
+.footer-link--white,
+.footer-link--gray {
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease;
+  width: fit-content;
+}
+.footer-link--white:hover,
+.footer-link--gray:hover {
+  border-bottom-color: currentColor;
+}
+.footer__content-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1.5vw;
+}
+.footer__team-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  column-gap: 2vw;
+  flex-wrap: wrap;
+}
+.footer__team {
+  width: 50%;
+  min-width: 220px;
+  display: flex;
+  align-items: center;
+  column-gap: 0.6vw;
+}
+.footer__team .dot {
+  width: 0.35vw;
+  height: 0.35vw;
+  border-radius: 50%;
+  background: var(--white-40);
+  flex: none;
+}
+.footer__design-team {
+  display: flex;
+  column-gap: 0.5vw;
+}
+
+/* ---------- Static (<992px) fallback ---------- */
+.static-experience section {
+  padding: 12vw 5vw;
+}
+.static-experience .static-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--main-radial);
+}
+.static-experience .static-black {
+  background: #000;
+}
+.static-experience .static-white {
+  background: var(--main-white);
+  color: var(--main-black);
+}
+.static-experience .static-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 4vw;
+  margin-top: 6vw;
+}
+.static-experience .static-card {
+  border-radius: 4vw;
+  overflow: hidden;
+  position: relative;
+  min-height: 60vw;
+}

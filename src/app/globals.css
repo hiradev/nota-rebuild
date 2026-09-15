@@ -1,0 +1,403 @@
+/* =========================================================================
+   NOTA — Global foundations
+   Transcribed from the build spec: type scale, color tokens, container,
+   radii, glass effects, breakpoints.
+   Breakpoints: <=479, <=767, <=991, base 992-1439, >=1440, >=1920
+   ========================================================================= */
+
+:root {
+  --main-black: #000000;
+  --main-white: #ffffff;
+  --gray: #666666;
+  --violet: #5e1550; /* declared, unused on this page */
+  --white-55: rgba(255, 255, 255, 0.55);
+  --white-50: rgba(255, 255, 255, 0.5);
+  --white-40: rgba(255, 255, 255, 0.4);
+  --black-40: rgba(0, 0, 0, 0.4);
+  --black-30: rgba(0, 0, 0, 0.3);
+  --black-20: rgba(0, 0, 0, 0.2);
+  --black-10: rgba(0, 0, 0, 0.1);
+  --black-2: rgba(0, 0, 0, 0.02);
+  --white-5: rgba(255, 255, 255, 0.05);
+  --white-20: rgba(255, 255, 255, 0.2);
+  --accent: #ff2200;
+  --error: #ff1900;
+  --main-radial: radial-gradient(at center top, #969ca6 0%, #3a3c40 80%);
+
+  --container-pad: 2.02vw;
+  --radius-flat: 4px;
+}
+
+@media (max-width: 991px) {
+  :root {
+    --container-pad: 2.08vw;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background: var(--main-black);
+  color: var(--main-white);
+  width: 100%;
+}
+
+/* overflow-x:hidden must live on exactly one of html/body — setting it
+   on both forces overflow-y:auto on both too (per the CSS overflow
+   spec), which makes body a second independent scroll container and
+   silently breaks position:sticky for every descendant in Chromium. */
+body {
+  overflow-x: hidden;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.serif {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+}
+
+/* -------------------------------------------------------------------------
+   Layout / container
+   ------------------------------------------------------------------------- */
+
+.container--primary {
+  width: 100%;
+  max-width: none;
+  padding: 0 var(--container-pad);
+}
+
+.negative-margin--100-vh {
+  margin-top: -100vh;
+}
+
+/* -------------------------------------------------------------------------
+   Colour tokens — text (.tc--*) and background (.bc--*)
+   ------------------------------------------------------------------------- */
+
+.tc--main-black { color: var(--main-black); }
+.tc--main-white { color: var(--main-white); }
+.tc--gray { color: var(--gray); }
+.tc--main-white-55 { color: var(--white-55); }
+.tc--main-white-50 { color: var(--white-50); }
+.tc--main-white-40 { color: var(--white-40); }
+.tc--black-40 { color: var(--black-40); }
+.tc--error { color: var(--error); }
+
+.bc--main-black { background-color: var(--main-black); }
+.bc--main-white { background-color: var(--main-white); }
+.bc--main-radial { background: var(--main-radial); }
+.bc--black-30 { background-color: var(--black-30); }
+.bc--black-20 { background-color: var(--black-20); }
+.bc--black-2 { background-color: var(--black-2); }
+.bc--white-5 { background-color: var(--white-5); }
+.bc--white-40 { background-color: var(--white-40); }
+
+.border--white-20 { border: 1px solid var(--white-20); }
+.border--black-10 { border: 1px solid var(--black-10); }
+
+/* -------------------------------------------------------------------------
+   Radii
+   ------------------------------------------------------------------------- */
+
+.border-radius--flat { border-radius: var(--radius-flat); }
+.border-radius--spec-card { border-radius: 1.21vw; }
+.border-radius--glass-plate { border-radius: 1.61vw; }
+.border-radius--detail-sm { border-radius: 6.05vw; }
+.border-radius--detail-lg { border-radius: 15.12vw; }
+.border-radius--pill-video { border-radius: 30.24vw; }
+.border-radius--100 { border-radius: 100vw; }
+
+/* -------------------------------------------------------------------------
+   Glass effects
+   ------------------------------------------------------------------------- */
+
+.effect--glass {
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.paper__plate {
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  background-color: var(--white-5);
+}
+
+.details__text-wrapper {
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background-color: var(--black-30);
+}
+
+/* -------------------------------------------------------------------------
+   Type scale
+   Each token: family/weight/line-height/letter-spacing come from the base
+   rule; only font-size (and the rare lh/ls override) change per breakpoint.
+   ------------------------------------------------------------------------- */
+
+.headline--1 {
+  font-family: var(--font-instrument-serif), serif;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: -0.04em;
+  font-size: 9.68vw;
+}
+.headline--2 {
+  font-family: var(--font-instrument-serif), serif;
+  font-weight: 400;
+  line-height: 80%;
+  letter-spacing: -0.05em;
+  font-size: 12.1vw;
+}
+.headline--3 {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  line-height: 100%;
+  letter-spacing: -0.07em;
+  font-size: 2.22vw;
+}
+.headline--4 {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  line-height: 100%;
+  letter-spacing: -0.07em;
+  font-size: 1.81vw;
+}
+.large-text--1 {
+  font-family: var(--font-instrument-serif), serif;
+  font-weight: 400;
+  line-height: 110%;
+  letter-spacing: -0.03em;
+  font-size: 4.64vw;
+}
+.large-text--2 {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -0.07em;
+  font-size: 2.62vw;
+}
+.large-text--3 {
+  font-family: var(--font-instrument-serif), serif;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: -0.05em;
+  font-size: 6.05vw;
+}
+.main-text {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  line-height: 130%;
+  letter-spacing: -0.05em;
+  font-size: 1.81vw;
+}
+.card-text {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  line-height: 130%;
+  letter-spacing: -0.05em;
+  font-size: 1.61vw;
+}
+.descriptor {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+  font-size: 1.61vw;
+}
+.menu-link {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: -0.04em;
+  font-size: 1.61vw;
+}
+.button-title {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: -0.04em;
+  font-size: 1.61vw;
+}
+.footer-text {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  line-height: 115%;
+  letter-spacing: -0.06em;
+  font-size: 2.42vw;
+}
+.footer-title {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  font-size: 1.41vw;
+}
+.popup-link {
+  font-family: var(--font-instrument-serif), serif;
+  font-weight: 400;
+  line-height: 110%;
+  letter-spacing: -0.03em;
+  font-size: 3.02vw;
+}
+.error-text {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  line-height: 110%;
+  letter-spacing: -0.04em;
+  color: var(--error);
+  font-size: 1.21vw;
+}
+
+/* <=991 */
+@media (max-width: 991px) {
+  .headline--1 { font-size: 12.5vw; }
+  .headline--2 { font-size: 12.5vw; line-height: 100%; letter-spacing: -0.04em; }
+  .headline--3 { font-size: 3.13vw; }
+  .headline--4 { font-size: 2.34vw; }
+  .large-text--1 { font-size: 6.77vw; letter-spacing: -0.05em; }
+  .large-text--2 { font-size: 3.39vw; letter-spacing: -0.06em; }
+  .large-text--3 { font-size: 6.77vw; }
+  .main-text { font-size: 2.34vw; }
+  .card-text { font-size: 2.08vw; }
+  .descriptor { font-size: 2.08vw; }
+  .menu-link { font-size: 3.13vw; }
+  .button-title { font-size: 3.13vw; }
+  .footer-text { font-size: 2.6vw; line-height: 120%; }
+  .footer-title { font-size: 1.82vw; }
+  .popup-link { font-size: 5.12vw; }
+  .error-text { font-size: 1.56vw; }
+}
+
+/* <=767 */
+@media (max-width: 767px) {
+  .headline--1 { font-size: 14.58vw; letter-spacing: -0.05em; }
+  .headline--2 { font-size: 14.58vw; }
+  .headline--3 { font-size: 3.75vw; }
+  .headline--4 { font-size: 2.92vw; }
+  .large-text--1 { font-size: 6.25vw; }
+  .large-text--2 { font-size: 4.17vw; }
+  .large-text--3 { font-size: 6.25vw; line-height: 110%; }
+  .main-text { font-size: 3.13vw; }
+  .card-text { font-size: 3.13vw; }
+  .descriptor { font-size: 2.92vw; }
+  .menu-link { font-size: 3.75vw; }
+  .button-title { font-size: 2.92vw; }
+  .footer-text { font-size: 3.75vw; }
+  .footer-title { font-size: 2.92vw; }
+  .popup-link { font-size: 6.25vw; }
+  .error-text { font-size: 2.5vw; }
+}
+
+/* <=479 */
+@media (max-width: 479px) {
+  .headline--1 { font-size: 18.75vw; }
+  .headline--2 { font-size: 18.75vw; }
+  .headline--3 { font-size: 5.63vw; }
+  .headline--4 { font-size: 4.38vw; }
+  .large-text--1 { font-size: 9.38vw; }
+  .large-text--2 { font-size: 6.25vw; }
+  .large-text--3 { font-size: 9.38vw; }
+  .main-text { font-size: 4.38vw; }
+  .card-text { font-size: 4.38vw; }
+  .descriptor { font-size: 4.38vw; }
+  .menu-link { font-size: 5.33vw; }
+  .button-title { font-size: 4.38vw; }
+  .footer-text { font-size: 5.63vw; }
+  .footer-title { font-size: 4.38vw; }
+  .popup-link { font-size: 9.38vw; }
+  .error-text { font-size: 3.75vw; }
+}
+
+/* >=1440 */
+@media (min-width: 1440px) {
+  .headline--1 { font-size: 6.67vw; }
+  .headline--2 { font-size: 10.42vw; }
+  .headline--3 { font-size: 1.53vw; }
+  .headline--4 { font-size: 1.25vw; }
+  .large-text--1 { font-size: 3.82vw; }
+  .large-text--2 { font-size: 1.81vw; }
+  .large-text--3 { font-size: 6.67vw; letter-spacing: -0.04em; }
+  .main-text { font-size: 1.25vw; }
+  .card-text { font-size: 1.11vw; }
+  .descriptor { font-size: 1.11vw; }
+  .menu-link { font-size: 1.11vw; }
+  .button-title { font-size: 1.11vw; }
+  .footer-text { font-size: 1.67vw; }
+  .footer-title { font-size: 0.97vw; }
+  .popup-link { font-size: 2.08vw; }
+  .error-text { font-size: 0.83vw; }
+  :root { --container-pad: 2.02vw; }
+}
+
+/* >=1920 */
+@media (min-width: 1920px) {
+  .headline--1 { font-size: 5vw; }
+  .headline--2 { font-size: 10.42vw; }
+  .headline--3 { font-size: 1.25vw; }
+  .headline--4 { font-size: 0.94vw; }
+  .large-text--1 { font-size: 3.65vw; }
+  .large-text--2 { font-size: 1.67vw; }
+  .large-text--3 { font-size: 5vw; }
+  .main-text { font-size: 0.94vw; }
+  .card-text { font-size: 0.83vw; }
+  .descriptor { font-size: 0.83vw; }
+  .menu-link { font-size: 0.83vw; }
+  .button-title { font-size: 0.83vw; }
+  .footer-text { font-size: 1.25vw; }
+  .footer-title { font-size: 0.73vw; }
+  .popup-link { font-size: 1.56vw; }
+  .error-text { font-size: 0.63vw; }
+}
+
+/* -------------------------------------------------------------------------
+   Utility
+   ------------------------------------------------------------------------- */
+
+.space-char {
+  display: inline-block;
+  width: 0.27em;
+}
+
+.visually-hidden-until-ready {
+  visibility: hidden;
+  display: inline-block;
+}
+
+/* -------------------------------------------------------------------------
+   The animated desktop experience only exists >=992px; a completely
+   separate --static section set takes over below that per the spec's
+   "991px hard fork". This build focuses on the desktop scroll experience
+   and provides a simplified static stack below 992px.
+   ------------------------------------------------------------------------- */
+
+.desktop-experience { display: block; }
+.static-experience { display: none; }
+
+@media (max-width: 991px) {
+  .desktop-experience { display: none; }
+  .static-experience { display: block; }
+}

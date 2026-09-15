@@ -1,0 +1,840 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e5]:
+      - generic [ref=e7]:
+        - generic [ref=e8]:
+          - link [ref=e9] [cursor=pointer]:
+            - /url: /main
+          - navigation [ref=e13]:
+            - link "S p e c i f i c a t i o n s t i p p f i c i s t c i s t t i p p f i c i s t c i s t" [ref=e14] [cursor=pointer]:
+              - /url: "#i34o078vy_0"
+              - generic [ref=e15]:
+                - generic [ref=e16]: S
+                - generic [ref=e17]: p
+                - generic [ref=e18]: e
+                - generic [ref=e19]: c
+                - generic [ref=e20]: i
+                - generic [ref=e21]: f
+                - generic [ref=e22]: i
+                - generic [ref=e23]: c
+                - generic [ref=e24]: a
+                - generic [ref=e25]: t
+                - generic [ref=e26]: i
+                - generic [ref=e27]: o
+                - generic [ref=e28]: "n"
+                - generic [ref=e29]: s
+              - generic:
+                - generic: t
+                - generic: i
+                - generic: p
+                - generic: p
+                - generic: f
+                - generic: i
+                - generic: c
+                - generic: i
+                - generic: s
+                - generic: t
+                - generic: c
+                - generic: i
+                - generic: s
+                - generic: t
+              - generic:
+                - generic: t
+                - generic: i
+                - generic: p
+                - generic: p
+                - generic: f
+                - generic: i
+                - generic: c
+                - generic: i
+                - generic: s
+                - generic: t
+                - generic: c
+                - generic: i
+                - generic: s
+                - generic: t
+            - link "W h o i t ' s f o r t i o t r r ' t ' ' i o t i o t r r ' t ' ' i o" [ref=e30] [cursor=pointer]:
+              - /url: "#i2hggnt58_0"
+              - generic [ref=e31]:
+                - generic [ref=e32]: W
+                - generic [ref=e33]: h
+                - generic [ref=e34]: o
+                - generic [ref=e36]: i
+                - generic [ref=e37]: t
+                - generic [ref=e38]: "'"
+                - generic [ref=e39]: s
+                - generic [ref=e41]: f
+                - generic [ref=e42]: o
+                - generic [ref=e43]: r
+              - generic:
+                - generic: t
+                - generic: i
+                - generic: o
+                - generic: t
+                - generic: r
+                - generic: r
+                - generic: "'"
+                - generic: t
+                - generic: "'"
+                - generic: "'"
+                - generic: i
+                - generic: o
+              - generic:
+                - generic: t
+                - generic: i
+                - generic: o
+                - generic: t
+                - generic: r
+                - generic: r
+                - generic: "'"
+                - generic: t
+                - generic: "'"
+                - generic: "'"
+                - generic: i
+                - generic: o
+            - link "A b o u t u t a b b u t a b b" [ref=e44] [cursor=pointer]:
+              - /url: "#i0oeetgkk_0"
+              - generic [ref=e45]:
+                - generic [ref=e46]: A
+                - generic [ref=e47]: b
+                - generic [ref=e48]: o
+                - generic [ref=e49]: u
+                - generic [ref=e50]: t
+              - generic:
+                - generic: u
+                - generic: t
+                - generic: a
+                - generic: b
+                - generic: b
+              - generic:
+                - generic: u
+                - generic: t
+                - generic: a
+                - generic: b
+                - generic: b
+            - link "I n s i d e t h e b o x s b b h h r e o o r o y t b s b b h h r e o o r o y t b" [ref=e51] [cursor=pointer]:
+              - /url: "#iyv5tgngp_0"
+              - generic [ref=e52]:
+                - generic [ref=e53]: I
+                - generic [ref=e54]: "n"
+                - generic [ref=e55]: s
+                - generic [ref=e56]: i
+                - generic [ref=e57]: d
+                - generic [ref=e58]: e
+                - generic [ref=e60]: t
+                - generic [ref=e61]: h
+                - generic [ref=e62]: e
+                - generic [ref=e64]: b
+                - generic [ref=e65]: o
+                - generic [ref=e66]: x
+              - generic:
+                - generic: s
+                - generic: b
+                - generic: b
+                - generic: h
+                - generic: h
+                - generic: r
+                - generic: e
+                - generic: o
+                - generic: o
+                - generic: r
+                - generic: o
+                - generic: "y"
+                - generic: t
+                - generic: b
+              - generic:
+                - generic: s
+                - generic: b
+                - generic: b
+                - generic: h
+                - generic: h
+                - generic: r
+                - generic: e
+                - generic: o
+                - generic: o
+                - generic: r
+                - generic: o
+                - generic: "y"
+                - generic: t
+                - generic: b
+        - button "logo Order Nota One $300" [ref=e67] [cursor=pointer]:
+          - img "logo" [ref=e69]
+          - generic [ref=e70]:
+            - generic [ref=e71]:
+              - generic [ref=e72]: Order
+              - generic [ref=e74]: Nota One
+            - generic [ref=e77]: $300
+    - generic: 100%
+    - generic [ref=e79]:
+      - generic [ref=e81]:
+        - img "Lottie animation" [ref=e84]
+        - generic [ref=e91]:
+          - heading "S m a r t p e n e r a n r p n t t e r a n r p n t t" [level=1] [ref=e92]:
+            - generic [ref=e93]:
+              - generic [ref=e94]: S
+              - generic [ref=e95]: m
+              - generic [ref=e96]: a
+              - generic [ref=e97]: r
+              - generic [ref=e98]: t
+              - generic [ref=e100]: p
+              - generic [ref=e101]: e
+              - generic [ref=e102]: "n"
+            - generic:
+              - generic: e
+              - generic: r
+              - generic: a
+              - generic: "n"
+              - generic: r
+              - generic: p
+              - generic: "n"
+              - generic: t
+              - generic: t
+            - generic:
+              - generic: e
+              - generic: r
+              - generic: a
+              - generic: "n"
+              - generic: r
+              - generic: p
+              - generic: "n"
+              - generic: t
+              - generic: t
+          - heading "f o r r e a l t h i n k i n g r n r g n n f s t i i g k t n i n r n r g n n f s t i i g k t n i n" [level=1] [ref=e103]:
+            - generic [ref=e104]:
+              - generic [ref=e105]: f
+              - generic [ref=e106]: o
+              - generic [ref=e107]: r
+              - generic [ref=e109]: r
+              - generic [ref=e110]: e
+              - generic [ref=e111]: a
+              - generic [ref=e112]: l
+              - generic [ref=e114]: t
+              - generic [ref=e115]: h
+              - generic [ref=e116]: i
+              - generic [ref=e117]: "n"
+              - generic [ref=e118]: k
+              - generic [ref=e119]: i
+              - generic [ref=e120]: "n"
+              - generic [ref=e121]: g
+            - generic:
+              - generic: r
+              - generic: "n"
+              - generic: r
+              - generic: g
+              - generic: "n"
+              - generic: "n"
+              - generic: f
+              - generic: s
+              - generic: t
+              - generic: i
+              - generic: i
+              - generic: g
+              - generic: k
+              - generic: t
+              - generic: "n"
+              - generic: i
+              - generic: "n"
+            - generic:
+              - generic: r
+              - generic: "n"
+              - generic: r
+              - generic: g
+              - generic: "n"
+              - generic: "n"
+              - generic: f
+              - generic: s
+              - generic: t
+              - generic: i
+              - generic: i
+              - generic: g
+              - generic: k
+              - generic: t
+              - generic: "n"
+              - generic: i
+              - generic: "n"
+      - generic [ref=e136]:
+        - generic [ref=e137]:
+          - heading "Nota pen" [level=2] [ref=e138]
+          - heading "Specifications" [level=2] [ref=e140]
+        - img "Black smart pen" [ref=e144]
+        - generic [ref=e145]:
+          - generic [ref=e146]:
+            - heading "Writing System" [level=3] [ref=e148]
+            - generic [ref=e150]:
+              - paragraph [ref=e153]:
+                - generic [ref=e154]: Fountain pen nib
+              - paragraph [ref=e158]:
+                - generic [ref=e159]: Natural ink flow
+              - paragraph [ref=e163]:
+                - generic [ref=e164]: Replaceable fountain-pen ink cartridge
+              - paragraph [ref=e168]:
+                - generic [ref=e169]: Designed for precise, expressive handwriting
+          - generic [ref=e171]:
+            - heading "Capture Technology" [level=3] [ref=e173]
+            - generic [ref=e175]:
+              - paragraph [ref=e178]:
+                - generic [ref=e179]: High-precision optical tracking
+              - paragraph [ref=e183]:
+                - generic [ref=e184]: Real-time stroke capture
+              - paragraph [ref=e188]:
+                - generic [ref=e189]: Line-by-line accuracy
+              - paragraph [ref=e193]:
+                - generic [ref=e194]: Supports handwriting, diagrams, sketches
+          - generic [ref=e196]:
+            - heading "Digital Continuity" [level=3] [ref=e198]
+            - generic [ref=e200]:
+              - paragraph [ref=e203]:
+                - generic [ref=e204]: Notes sync automatically
+              - paragraph [ref=e208]:
+                - generic [ref=e209]: Searchable over time
+              - paragraph [ref=e213]:
+                - generic [ref=e214]: Structured with AI support
+              - paragraph [ref=e218]:
+                - generic [ref=e219]: Ready when you return
+      - generic [ref=e225]:
+        - generic [ref=e229]:
+          - paragraph [ref=e231]:
+            - generic [ref=e724]: S
+            - generic [ref=e726]: o
+            - generic [ref=e728]: m
+            - generic [ref=e730]: e
+            - generic [ref=e732]: t
+            - generic [ref=e734]: h
+            - generic [ref=e736]: o
+            - generic [ref=e738]: u
+            - generic [ref=e740]: g
+            - generic [ref=e742]: h
+            - generic [ref=e744]: t
+            - generic [ref=e746]: s
+            - generic [ref=e748]: "n"
+            - generic [ref=e750]: e
+            - generic [ref=e752]: e
+            - generic [ref=e754]: d
+            - generic [ref=e756]: t
+            - generic [ref=e758]: i
+            - generic [ref=e760]: m
+            - generic [ref=e762]: e
+            - generic [ref=e764]: ","
+            - generic [ref=e766]: s
+            - generic [ref=e768]: p
+            - generic [ref=e770]: a
+            - generic [ref=e772]: c
+            - generic [ref=e774]: e
+            - generic [ref=e776]: ","
+            - generic [ref=e778]: a
+            - generic [ref=e780]: "n"
+            - generic [ref=e782]: d
+            - generic [ref=e784]: a
+            - generic [ref=e786]: p
+            - generic [ref=e788]: h
+            - generic [ref=e790]: "y"
+            - generic [ref=e792]: s
+            - generic [ref=e794]: i
+            - generic [ref=e796]: c
+            - generic [ref=e798]: a
+            - generic [ref=e800]: l
+            - generic [ref=e802]: t
+            - generic [ref=e804]: r
+            - generic [ref=e806]: a
+            - generic [ref=e808]: c
+            - generic [ref=e810]: e
+            - generic [ref=e812]: t
+            - generic [ref=e814]: o
+            - generic [ref=e816]: e
+            - generic [ref=e818]: x
+            - generic [ref=e820]: i
+            - generic [ref=e822]: s
+            - generic [ref=e824]: t
+            - generic [ref=e826]: .
+            - generic [ref=e828]: W
+            - generic [ref=e830]: r
+            - generic [ref=e832]: i
+            - generic [ref=e834]: t
+            - generic [ref=e836]: i
+            - generic [ref=e838]: "n"
+            - generic [ref=e840]: g
+            - generic [ref=e842]: b
+            - generic [ref=e844]: "y"
+            - generic [ref=e846]: h
+            - generic [ref=e848]: a
+            - generic [ref=e850]: "n"
+            - generic [ref=e852]: d
+            - generic [ref=e854]: c
+            - generic [ref=e856]: r
+            - generic [ref=e858]: e
+            - generic [ref=e860]: a
+            - generic [ref=e862]: t
+            - generic [ref=e864]: e
+            - generic [ref=e866]: s
+            - generic [ref=e868]: f
+            - generic [ref=e870]: o
+            - generic [ref=e872]: c
+            - generic [ref=e874]: u
+            - generic [ref=e876]: s
+            - generic [ref=e878]: ","
+            - generic [ref=e880]: p
+            - generic [ref=e882]: r
+            - generic [ref=e884]: e
+            - generic [ref=e886]: s
+            - generic [ref=e888]: e
+            - generic [ref=e890]: "n"
+            - generic [ref=e892]: c
+            - generic [ref=e894]: e
+            - generic [ref=e896]: ","
+            - generic [ref=e898]: a
+            - generic [ref=e900]: "n"
+            - generic [ref=e902]: d
+            - generic [ref=e904]: a
+            - generic [ref=e906]: d
+            - generic [ref=e908]: e
+            - generic [ref=e910]: e
+            - generic [ref=e912]: p
+            - generic [ref=e914]: e
+            - generic [ref=e916]: r
+            - generic [ref=e918]: c
+            - generic [ref=e920]: o
+            - generic [ref=e922]: "n"
+            - generic [ref=e924]: "n"
+            - generic [ref=e926]: e
+            - generic [ref=e928]: c
+            - generic [ref=e930]: t
+            - generic [ref=e932]: i
+            - generic [ref=e934]: o
+            - generic [ref=e936]: "n"
+            - generic [ref=e938]: w
+            - generic [ref=e940]: i
+            - generic [ref=e942]: t
+            - generic [ref=e944]: h
+            - generic [ref=e946]: i
+            - generic [ref=e948]: d
+            - generic [ref=e950]: e
+            - generic [ref=e952]: a
+            - generic [ref=e954]: s
+            - generic [ref=e956]: .
+            - generic [ref=e958]: T
+            - generic [ref=e960]: h
+            - generic [ref=e962]: i
+            - generic [ref=e964]: s
+            - generic [ref=e966]: t
+            - generic [ref=e968]: o
+            - generic [ref=e970]: o
+            - generic [ref=e972]: l
+            - generic [ref=e974]: i
+            - generic [ref=e976]: s
+            - generic [ref=e978]: b
+            - generic [ref=e980]: u
+            - generic [ref=e982]: i
+            - generic [ref=e984]: l
+            - generic [ref=e986]: t
+            - generic [ref=e988]: a
+            - generic [ref=e990]: r
+            - generic [ref=e992]: o
+            - generic [ref=e994]: u
+            - generic [ref=e996]: "n"
+            - generic [ref=e998]: d
+            - generic [ref=e1000]: t
+            - generic [ref=e1002]: h
+            - generic [ref=e1004]: a
+            - generic [ref=e1006]: t
+            - generic [ref=e1008]: s
+            - generic [ref=e1010]: i
+            - generic [ref=e1012]: m
+            - generic [ref=e1014]: p
+            - generic [ref=e1016]: l
+            - generic [ref=e1018]: e
+            - generic [ref=e1020]: t
+            - generic [ref=e1022]: r
+            - generic [ref=e1024]: u
+            - generic [ref=e1026]: t
+            - generic [ref=e1028]: h
+            - generic [ref=e1030]: .
+          - generic [ref=e262]:
+            - heading "Who it's for:" [level=2] [ref=e263]
+            - generic [ref=e265]:
+              - paragraph [ref=e266]:
+                - generic [ref=e267]: This tool is made for people who think on paper. It
+              - paragraph [ref=e268]:
+                - generic [ref=e269]: keeps handwriting natural and focused, letting you write the way you always have without distractions or screens getting in the way.
+              - paragraph [ref=e270]:
+                - generic [ref=e271]: Everything you write syncs to the app, where
+              - paragraph [ref=e272]:
+                - generic [ref=e273]: your notes are organized, searchable, and ready to work with AI when you need more clarity or structure.
+        - generic [ref=e274]:
+          - generic [ref=e275]:
+            - heading "Students & Learners" [level=3] [ref=e276]
+            - paragraph [ref=e278]:
+              - generic [ref=e279]: Handwritten notes stay personal and intuitive, but become searchable, organized, and easy to study. Lectures, ideas, and revisions are captured as they are — then supported by AI summaries, text recognition, and quick navigation when it matters most.
+          - generic [ref=e280]:
+            - heading "Creators, Designers & Architects" [level=3] [ref=e281]
+            - paragraph [ref=e283]:
+              - generic [ref=e284]: Sketches, diagrams, concepts, and fragments of ideas belong on paper. This tool makes sure they don't disappear. Everything drawn or written is safely stored, easy to revisit, and ready to evolve into something bigger—without interrupting the creative flow.
+          - generic [ref=e285]:
+            - heading "Managers & Product Thinkers" [level=3] [ref=e286]
+            - paragraph [ref=e288]:
+              - generic [ref=e289]: Meetings start on paper and end with structure. Notes turn into clear summaries, tasks, and follow-ups. The pen captures everything quietly, while the app helps organize decisions without pulling attention away from the room.
+      - generic [ref=e294]:
+        - generic [ref=e296]:
+          - generic [ref=e297]:
+            - img "Phone displaying synced handwritten notes from the notebook" [ref=e299]
+            - generic [ref=e300]:
+              - generic [ref=e303]:
+                - generic [ref=e1043]: Everything you write is synced
+                - generic [ref=e1044]: to your phone in real time
+              - generic [ref=e304]:
+                - generic [ref=e305]: Your notes. Already there.
+                - generic [ref=e308]: Every note is instantly transferred to your device and safely stored in your personal space. Access your thoughts anytime, organize them effortlessly, and continue working across devices. Your handwriting becomes part of a system that is searchable, structured, and always available.
+          - generic [ref=e311]:
+            - img "Open notebook with handwritten notes and sketches" [ref=e313]
+            - generic [ref=e314]:
+              - generic [ref=e317]:
+                - generic [ref=e1047]: No delays. No glitches.
+                - generic [ref=e1048]: No random effects.
+              - generic [ref=e318]:
+                - generic [ref=e319]: AI-powered structure
+                - generic [ref=e322]: Handwriting is processed in real time and enriched quietly in the background. AI recognizes text, structure, and context to organize notes, highlight key ideas, and connect thoughts over time. The technology remains invisible, so your focus remains fully on writing.
+          - generic [ref=e325]:
+            - img "Open smart notebook" [ref=e327]
+            - generic [ref=e328]:
+              - generic [ref=e331]:
+                - generic [ref=e1051]: Looks like paper.
+                - generic [ref=e1052]: Works like a system.
+              - generic [ref=e332]:
+                - generic [ref=e333]: For you, it's just a blank sheet
+                - generic [ref=e336]: You write freely, without grids, guides, or visible markers. The paper feels clean and familiar, keeping your focus on ideas instead of tools. Nothing distracts you from the act of writing. Nothing changes in how you write - only what becomes possible after.
+          - generic [ref=e339]:
+            - img "Black smart notebook with an elastic band" [ref=e341]
+            - generic [ref=e342]:
+              - paragraph [ref=e344]:
+                - generic [ref=e345]:
+                  - generic [ref=e1055]: We use special paper
+                  - generic [ref=e1056]: with a nearly invisible
+                  - generic [ref=e1057]: pattern
+              - generic [ref=e346]:
+                - heading "For the pen, it's a precise map" [level=3] [ref=e348]
+                - paragraph [ref=e351]:
+                  - generic [ref=e352]: The pattern defines exact coordinates across the page, allowing the pen to capture every stroke with precision and consistency. For you, it feels like ordinary paper. For the system, it becomes a stable reference that turns handwriting into structured, accurate digital data.
+          - generic [ref=e359]:
+            - heading "Works with" [level=2] [ref=e360]
+            - heading "smart paper" [level=2] [ref=e362]
+        - heading "Inside the box" [level=2] [ref=e368]:
+          - generic [ref=e369]:
+            - generic [ref=e1062]: Inside
+            - generic [ref=e1064]: the box
+    - generic [ref=e373]:
+      - generic [ref=e403]:
+        - heading "A complete, ready-to-use set" [level=3] [ref=e404]
+        - paragraph [ref=e406]:
+          - generic [ref=e407]: Smart pen, Smartpaper notepad, charging cable, and instructions — carefully packaged for a hassle-free start.
+      - paragraph [ref=e1067]:
+        - generic [ref=e1068]: A
+        - generic [ref=e1070]: p
+        - generic [ref=e1072]: r
+        - generic [ref=e1074]: e
+        - generic [ref=e1076]: c
+        - generic [ref=e1078]: i
+        - generic [ref=e1080]: s
+        - generic [ref=e1082]: i
+        - generic [ref=e1084]: o
+        - generic [ref=e1086]: "n"
+        - generic [ref=e1088]: s
+        - generic [ref=e1090]: m
+        - generic [ref=e1092]: a
+        - generic [ref=e1094]: r
+        - generic [ref=e1096]: t
+        - generic [ref=e1098]: p
+        - generic [ref=e1100]: e
+        - generic [ref=e1102]: "n"
+        - generic [ref=e1104]: w
+        - generic [ref=e1106]: i
+        - generic [ref=e1108]: t
+        - generic [ref=e1110]: h
+        - generic [ref=e1112]: a
+        - generic [ref=e1114]: s
+        - generic [ref=e1116]: o
+        - generic [ref=e1118]: l
+        - generic [ref=e1120]: i
+        - generic [ref=e1122]: d
+        - generic [ref=e1124]: a
+        - generic [ref=e1126]: l
+        - generic [ref=e1128]: u
+        - generic [ref=e1130]: m
+        - generic [ref=e1132]: i
+        - generic [ref=e1134]: "n"
+        - generic [ref=e1136]: u
+        - generic [ref=e1138]: m
+        - generic [ref=e1140]: b
+        - generic [ref=e1142]: o
+        - generic [ref=e1144]: d
+        - generic [ref=e1146]: "y"
+        - generic [ref=e1148]: ","
+        - generic [ref=e1150]: d
+        - generic [ref=e1152]: e
+        - generic [ref=e1154]: s
+        - generic [ref=e1156]: i
+        - generic [ref=e1158]: g
+        - generic [ref=e1160]: "n"
+        - generic [ref=e1162]: e
+        - generic [ref=e1164]: d
+        - generic [ref=e1166]: f
+        - generic [ref=e1168]: o
+        - generic [ref=e1170]: r
+        - generic [ref=e1172]: "n"
+        - generic [ref=e1174]: a
+        - generic [ref=e1176]: t
+        - generic [ref=e1178]: u
+        - generic [ref=e1180]: r
+        - generic [ref=e1182]: a
+        - generic [ref=e1184]: l
+        - generic [ref=e1186]: h
+        - generic [ref=e1188]: a
+        - generic [ref=e1190]: "n"
+        - generic [ref=e1192]: d
+        - generic [ref=e1194]: w
+        - generic [ref=e1196]: r
+        - generic [ref=e1198]: i
+        - generic [ref=e1200]: t
+        - generic [ref=e1202]: i
+        - generic [ref=e1204]: "n"
+        - generic [ref=e1206]: g
+        - generic [ref=e1208]: a
+        - generic [ref=e1210]: "n"
+        - generic [ref=e1212]: d
+        - generic [ref=e1214]: a
+        - generic [ref=e1216]: c
+        - generic [ref=e1218]: c
+        - generic [ref=e1220]: u
+        - generic [ref=e1222]: r
+        - generic [ref=e1224]: a
+        - generic [ref=e1226]: t
+        - generic [ref=e1228]: e
+        - generic [ref=e1230]: d
+        - generic [ref=e1232]: i
+        - generic [ref=e1234]: g
+        - generic [ref=e1236]: i
+        - generic [ref=e1238]: t
+        - generic [ref=e1240]: a
+        - generic [ref=e1242]: l
+        - generic [ref=e1244]: c
+        - generic [ref=e1246]: a
+        - generic [ref=e1248]: p
+        - generic [ref=e1250]: t
+        - generic [ref=e1252]: u
+        - generic [ref=e1254]: r
+        - generic [ref=e1256]: e
+        - generic [ref=e1258]: .
+        - generic [ref=e1260]: S
+        - generic [ref=e1262]: e
+        - generic [ref=e1264]: a
+        - generic [ref=e1266]: m
+        - generic [ref=e1268]: l
+        - generic [ref=e1270]: e
+        - generic [ref=e1272]: s
+        - generic [ref=e1274]: s
+        - generic [ref=e1276]: l
+        - generic [ref=e1278]: "y"
+        - generic [ref=e1280]: c
+        - generic [ref=e1282]: o
+        - generic [ref=e1284]: "n"
+        - generic [ref=e1286]: "n"
+        - generic [ref=e1288]: e
+        - generic [ref=e1290]: c
+        - generic [ref=e1292]: t
+        - generic [ref=e1294]: s
+        - generic [ref=e1296]: t
+        - generic [ref=e1298]: o
+        - generic [ref=e1300]: s
+        - generic [ref=e1302]: m
+        - generic [ref=e1304]: a
+        - generic [ref=e1306]: r
+        - generic [ref=e1308]: t
+        - generic [ref=e1310]: p
+        - generic [ref=e1312]: a
+        - generic [ref=e1314]: p
+        - generic [ref=e1316]: e
+        - generic [ref=e1318]: r
+        - generic [ref=e1320]: ","
+        - generic [ref=e1322]: t
+        - generic [ref=e1324]: r
+        - generic [ref=e1326]: a
+        - generic [ref=e1328]: "n"
+        - generic [ref=e1330]: s
+        - generic [ref=e1332]: l
+        - generic [ref=e1334]: a
+        - generic [ref=e1336]: t
+        - generic [ref=e1338]: i
+        - generic [ref=e1340]: "n"
+        - generic [ref=e1342]: g
+        - generic [ref=e1344]: e
+        - generic [ref=e1346]: v
+        - generic [ref=e1348]: e
+        - generic [ref=e1350]: r
+        - generic [ref=e1352]: "y"
+        - generic [ref=e1354]: s
+        - generic [ref=e1356]: t
+        - generic [ref=e1358]: r
+        - generic [ref=e1360]: o
+        - generic [ref=e1362]: k
+        - generic [ref=e1364]: e
+        - generic [ref=e1366]: i
+        - generic [ref=e1368]: "n"
+        - generic [ref=e1370]: t
+        - generic [ref=e1372]: o
+        - generic [ref=e1374]: s
+        - generic [ref=e1376]: t
+        - generic [ref=e1378]: r
+        - generic [ref=e1380]: u
+        - generic [ref=e1382]: c
+        - generic [ref=e1384]: t
+        - generic [ref=e1386]: u
+        - generic [ref=e1388]: r
+        - generic [ref=e1390]: e
+        - generic [ref=e1392]: d
+        - generic [ref=e1394]: d
+        - generic [ref=e1396]: i
+        - generic [ref=e1398]: g
+        - generic [ref=e1400]: i
+        - generic [ref=e1402]: t
+        - generic [ref=e1404]: a
+        - generic [ref=e1406]: l
+        - generic [ref=e1408]: d
+        - generic [ref=e1410]: a
+        - generic [ref=e1412]: t
+        - generic [ref=e1414]: a
+        - generic [ref=e1416]: "-"
+        - generic [ref=e1418]: "n"
+        - generic [ref=e1420]: o
+        - generic [ref=e1422]: s
+        - generic [ref=e1424]: c
+        - generic [ref=e1426]: r
+        - generic [ref=e1428]: e
+        - generic [ref=e1430]: e
+        - generic [ref=e1432]: "n"
+        - generic [ref=e1434]: s
+        - generic [ref=e1436]: ","
+        - generic [ref=e1438]: "n"
+        - generic [ref=e1440]: o
+        - generic [ref=e1442]: d
+        - generic [ref=e1444]: i
+        - generic [ref=e1446]: s
+        - generic [ref=e1448]: t
+        - generic [ref=e1450]: r
+        - generic [ref=e1452]: a
+        - generic [ref=e1454]: c
+        - generic [ref=e1456]: t
+        - generic [ref=e1458]: i
+        - generic [ref=e1460]: o
+        - generic [ref=e1462]: "n"
+        - generic [ref=e1464]: s
+        - generic [ref=e1466]: ","
+        - generic [ref=e1468]: j
+        - generic [ref=e1470]: u
+        - generic [ref=e1472]: s
+        - generic [ref=e1474]: t
+        - generic [ref=e1476]: w
+        - generic [ref=e1478]: r
+        - generic [ref=e1480]: i
+        - generic [ref=e1482]: t
+        - generic [ref=e1484]: i
+        - generic [ref=e1486]: "n"
+        - generic [ref=e1488]: g
+        - generic [ref=e1490]: .
+      - generic [ref=e409]:
+        - generic [ref=e438]:
+          - heading "The NŌTA Smart Pen" [level=3] [ref=e439]
+          - paragraph [ref=e441]:
+            - generic [ref=e442]:
+              - generic [ref=e1493]: Aluminum body, USB-C charging, physical control button, and Bluetooth connectivity.
+              - generic [ref=e1494]: Up to 8 hours of active use with a lightweight, balanced design for everyday writing.
+        - generic [ref=e472]:
+          - heading "Charging Adapter" [level=3] [ref=e473]
+          - paragraph [ref=e475]:
+            - generic [ref=e476]:
+              - generic [ref=e1496]: Compact USB-C power adapter with stable output for everyday charging.
+              - generic [ref=e1497]: Designed for safe, efficient power delivery with minimal heat.
+    - generic [ref=e479]:
+      - generic [ref=e480]:
+        - paragraph [ref=e485]:
+          - generic [ref=e486]: Flush-fit precision cap
+        - paragraph [ref=e492]:
+          - generic [ref=e493]: Refined colors. Personal expression
+      - paragraph [ref=e498]:
+        - generic [ref=e499]: Durable metal nib, low-profile control button
+      - paragraph [ref=e504]:
+        - generic [ref=e505]: Aluminum body
+    - generic [ref=e508]:
+      - generic [ref=e511]:
+        - generic [ref=e512]:
+          - img "Silver Smart Fountain Pen" [ref=e1502]
+          - generic [ref=e515]:
+            - paragraph [ref=e517]:
+              - generic [ref=e518]: Impossible to
+            - paragraph [ref=e520]:
+              - generic [ref=e521]: overthink
+        - generic [ref=e522]:
+          - img "Black smart fountain pen" [ref=e524]
+          - generic [ref=e525]:
+            - paragraph [ref=e527]:
+              - generic [ref=e528]: Graphite Black.
+            - paragraph [ref=e530]:
+              - generic [ref=e531]: Clarity in silence.
+        - generic [ref=e532]:
+          - img "Blue Smart Fountain Pen" [ref=e1507]
+          - generic [ref=e535]:
+            - paragraph [ref=e537]:
+              - generic [ref=e538]: Mist Blue.
+            - paragraph [ref=e540]:
+              - generic [ref=e541]: Light thinking.
+        - generic [ref=e542]:
+          - img "Red smart fountain pen" [ref=e544]
+          - generic [ref=e545]:
+            - paragraph [ref=e547]:
+              - generic [ref=e548]: Precision Red.
+            - paragraph [ref=e550]:
+              - generic [ref=e551]: Form follows thought.
+        - generic [ref=e552]:
+          - img "Orange smart fountain pen" [ref=e554]
+          - generic [ref=e555]:
+            - paragraph [ref=e557]:
+              - generic [ref=e558]: Bright Orange.
+            - paragraph [ref=e560]:
+              - generic [ref=e561]: Steady focus.
+      - contentinfo [ref=e568]:
+        - generic [ref=e570]:
+          - generic [ref=e571]:
+            - paragraph [ref=e573]:
+              - generic [ref=e574]:
+                - generic [ref=e1515]: NŌTA creates tools that respect the way people think and write.
+                - generic [ref=e1516]: Natural handwriting, quietly connected to digital structure.
+            - generic [ref=e575]:
+              - generic [ref=e576]:
+                - heading "Navigation" [level=2] [ref=e577]
+                - generic [ref=e579]:
+                  - link "Specifications" [ref=e580] [cursor=pointer]:
+                    - /url: "#i34o078vy_0"
+                  - link "Who is it for?" [ref=e1519] [cursor=pointer]:
+                    - /url: "#i2hggnt58_0"
+                  - link "About" [ref=e584] [cursor=pointer]:
+                    - /url: "#i0oeetgkk_0"
+                  - link "Inside the box" [ref=e586] [cursor=pointer]:
+                    - /url: "#iyv5tgngp_0"
+              - generic [ref=e588]:
+                - heading "Year" [level=3] [ref=e589]
+                - paragraph [ref=e591]:
+                  - generic [ref=e592]: "2026"
+          - generic [ref=e593]:
+            - paragraph [ref=e594]:
+              - generic [ref=e595]: "@2026 Nōta Team"
+            - generic [ref=e596]:
+              - generic [ref=e597]:
+                - link "Made in Taptop" [ref=e599] [cursor=pointer]:
+                  - /url: https://taptop.pro/
+                - img "Ellipse 6750" [ref=e602]
+                - button "Built by NōtaTeam" [ref=e1527] [cursor=pointer]
+              - generic [ref=e606]:
+                - link "Designed by Alice" [ref=e607] [cursor=pointer]:
+                  - /url: https://www.behance.net/alicem
+                - link "& UPROCK Studio" [ref=e609] [cursor=pointer]:
+                  - /url: https://www.uprock.ru/
+  - link "Made in Taptop" [ref=e613] [cursor=pointer]:
+    - /url: https://taptop.pro/?utm_source=taptop_pro&utm_medium=embed&utm_campaign=badge&utm_content=icon
+  - iframe [ref=e615]
