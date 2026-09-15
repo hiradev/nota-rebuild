@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_homepage_paper_slides",
+  "info": {
+    "displayName": "Paper Slide",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "body": {
+      "type": "text",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": false
+    }
+  }
+}

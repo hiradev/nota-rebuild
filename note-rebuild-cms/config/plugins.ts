@@ -7,6 +7,7 @@ const allowedMediaTypes = [
   'application/pdf',
   'application/msword',
   'application/vnd.openxmlformats-officedocument.*',
+  'application/json',
   'text/plain',
   'text/csv',
 ];

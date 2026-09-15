@@ -2,17 +2,17 @@
 
 import { useEffect, useRef } from "react";
 import { ensureGsap } from "@/lib/gsapSetup";
+import { strapiMediaUrl } from "@/lib/strapi";
 import Image from "next/image";
 
-const COLORS = [
-  { id: "silver", image: "/images/color-1.webp", line1: "Impossible to", line2: "overthink" },
-  { id: "graphite", image: "/images/color-2.webp", line1: "Graphite Black.", line2: "Clarity in silence." },
-  { id: "blue", image: "/images/color-3.webp", line1: "Mist Blue.", line2: "Light thinking." },
-  { id: "red", image: "/images/color-4.webp", line1: "Precision Red.", line2: "Form follows thought." },
-  { id: "orange", image: "/images/color-5.webp", line1: "Bright Orange.", line2: "Steady focus." },
-];
+export default function Colors({ data }) {
+  const colors = (data?.slides || []).map((slide, i) => ({
+    id: i,
+    image: strapiMediaUrl(slide.image),
+    line1: slide.taglineLine1,
+    line2: slide.taglineLine2,
+  }));
 
-export default function Colors() {
   const sectionRef = useRef(null);
   const wrapRefs = useRef([]);
   const dotsRef = useRef([]);
@@ -20,15 +20,12 @@ export default function Colors() {
   useEffect(() => {
     const { gsap, ScrollTrigger } = ensureGsap();
     const ctx = gsap.context(() => {
-      const perSlide = 1 / COLORS.length;
+      // +1 reserves one slide-width of pure dwell time so the last slide
+      // holds fully visible before the section releases (matches sections.css).
+      const perSlide = 1 / (colors.length + 1);
 
-      // Dot 1 (silver) has no fromTo tween since it's visible by default,
-      // but it still needs its own ScrollTrigger zone so the pagination
-      // resets to it when scrolling back up from dot 2 (graphite).
-      // Without this, onToggle only ever fires for zones 2-5, and since
-      // those only act "on enter" (isActive === true) and no-op "on
-      // leave", scrolling back past the dot-2 zone's start left dot 2
-      // stuck active with nothing re-activating dot 1.
+      // Dot 1 needs its own zone too, so pagination resets to it on scroll-back
+      // (onToggle only fires "on enter", never resets on leave otherwise).
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "0% top",
@@ -43,7 +40,7 @@ export default function Colors() {
         },
       });
 
-      COLORS.slice(1).forEach((c, i) => {
+      colors.slice(1).forEach((c, i) => {
         const idx = i + 1;
         const start = idx * perSlide;
         const end = start + perSlide;
@@ -80,37 +77,39 @@ export default function Colors() {
   }, []);
 
   return (
-    <section className="section-colors" ref={sectionRef} id="colors">
+    <section className="section-colors" ref={sectionRef} id="colors" data-header-theme="dark">
       <div className="section-colors__camera">
-        {COLORS.map((c, i) => (
-          <div
+        {colors.map((c, i) => (
+          <article
             className="section-colors__wrapper"
             key={c.id}
             ref={(el) => (wrapRefs.current[i] = el)}
             style={{ opacity: i === 0 ? 1 : undefined, zIndex: i + 1 }}
           >
-            <Image
-              src={c.image}
-              alt={`Pen colorway — ${c.id}`}
-              fill
-              style={{ objectFit: "cover" }}
-              sizes="100vw"
-              priority={i === 0}
-            />
+            {c.image ? (
+              <Image
+                src={c.image}
+                alt={`Pen colorway — ${c.line1}`}
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="100vw"
+                priority={i === 0}
+              />
+            ) : null}
             <div className="section-colors__content-wrapper container--primary">
-              <div className="section-colors__text-wrapper large-text--3 tc--main-white">
+              <p className="section-colors__text-wrapper large-text--3 tc--main-white">
                 {c.line1}
-              </div>
-              <div className="section-colors__text-wrapper2 large-text--3 tc--main-white">
+              </p>
+              <p className="section-colors__text-wrapper2 large-text--3 tc--main-white">
                 {c.line2}
-              </div>
+              </p>
             </div>
-          </div>
+          </article>
         ))}
 
-        <div className="section-colors__paginations-wrapper">
-          {COLORS.map((c, i) => (
-            <div
+        <ul className="section-colors__paginations-wrapper">
+          {colors.map((c, i) => (
+            <li
               className={`pagination-dot bc--white-40${
                 i === 0 ? " pagination-dot--active" : ""
               }`}
@@ -118,7 +117,7 @@ export default function Colors() {
               ref={(el) => (dotsRef.current[i] = el)}
             />
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

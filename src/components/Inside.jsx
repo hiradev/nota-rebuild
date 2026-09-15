@@ -2,10 +2,11 @@
 
 import { useEffect, useRef } from "react";
 import { ensureGsap } from "@/lib/gsapSetup";
+import { strapiMediaUrl } from "@/lib/strapi";
 import Blinds from "./Blinds";
 import Image from "next/image";
 
-function BlindsItem({ title, body, image, alt }) {
+function BlindsItem({ title, body, image, alt, sizes = "50vw" }) {
   const contentRef = useRef(null);
   const blindsRef = useRef(null);
   const rootRef = useRef(null);
@@ -13,6 +14,8 @@ function BlindsItem({ title, body, image, alt }) {
   useEffect(() => {
     const { gsap } = ensureGsap();
     const ctx = gsap.context(() => {
+      // "top 40%" (not "bottom 40%") so the wipe completes shortly after
+      // entering view, matching Details.jsx's own reveal window.
       const slats = blindsRef.current.querySelectorAll(".inside__blind");
       gsap.fromTo(
         slats,
@@ -23,8 +26,8 @@ function BlindsItem({ title, body, image, alt }) {
           stagger: 0.01,
           scrollTrigger: {
             trigger: rootRef.current,
-            start: "top 80%",
-            end: "bottom 40%",
+            start: "top 90%",
+            end: "top 40%",
             scrub: true,
           },
         }
@@ -37,8 +40,8 @@ function BlindsItem({ title, body, image, alt }) {
           ease: "none",
           scrollTrigger: {
             trigger: rootRef.current,
-            start: "top 60%",
-            end: "top 20%",
+            start: "top 80%",
+            end: "top 45%",
             scrub: true,
           },
         }
@@ -48,14 +51,16 @@ function BlindsItem({ title, body, image, alt }) {
   }, []);
 
   return (
-    <div className="inside__blinds-item" ref={rootRef}>
-      <Image
-        src={image}
-        alt={alt}
-        fill
-        style={{ objectFit: "cover" }}
-        sizes="50vw"
-      />
+    <article className="inside__blinds-item" ref={rootRef}>
+      {image ? (
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          style={{ objectFit: "cover" }}
+          sizes={sizes}
+        />
+      ) : null}
       <div ref={blindsRef}>
         <Blinds />
       </div>
@@ -63,43 +68,51 @@ function BlindsItem({ title, body, image, alt }) {
         <h3 className="headline--3 tc--main-black">{title}</h3>
         <p className="main-text inside__blinds-text tc--gray">{body}</p>
       </div>
-    </div>
+    </article>
   );
 }
 
-export default function Inside() {
+export default function Inside({ data }) {
+  const blinds = data?.blinds || [];
+  const tagline = data?.tagline || "";
+  const [kit, pen, adapter] = blinds;
+
   return (
-    <section className="inside" id="inside">
+    <section className="inside" id="inside" data-header-theme="light">
       <div className="container--primary">
-        <div className="inside__complete-wrapper">
-          <BlindsItem
-            image="/images/blinds-1.webp"
-            alt="Full kit — pen, notepad, charging cable, and instructions"
-            title="A complete, ready-to-use set"
-            body="Everything in one box: the pen, a notepad, a charging cable, and instructions — ready to write from day one."
-          />
-        </div>
+        {kit ? (
+          <div className="inside__complete-wrapper">
+            <BlindsItem
+              image={strapiMediaUrl(kit.image)}
+              alt={kit.title}
+              title={kit.title}
+              body={kit.body}
+              sizes="100vw"
+            />
+          </div>
+        ) : null}
 
         <div className="inside__text-wrapper">
-          <p className="inside__text--animation">
-            Built like a precision instrument. Priced like one you&apos;d
-            actually buy.
-          </p>
+          <p className="inside__text--animation">{tagline}</p>
         </div>
 
         <div className="inside__device-wrapper">
-          <BlindsItem
-            image="/images/blinds-2.webp"
-            alt="Smart Pen — machined aluminum body"
-            title="Smart Pen"
-            body="Machined aluminum body, durable metal nib, and a low-profile control button."
-          />
-          <BlindsItem
-            image="/images/blinds-3.webp"
-            alt="Charging Adapter"
-            title="Charging Adapter"
-            body="USB-C fast charge — 10 minutes on the dock covers a full day of writing."
-          />
+          {pen ? (
+            <BlindsItem
+              image={strapiMediaUrl(pen.image)}
+              alt={pen.title}
+              title={pen.title}
+              body={pen.body}
+            />
+          ) : null}
+          {adapter ? (
+            <BlindsItem
+              image={strapiMediaUrl(adapter.image)}
+              alt={adapter.title}
+              title={adapter.title}
+              body={adapter.body}
+            />
+          ) : null}
         </div>
       </div>
     </section>

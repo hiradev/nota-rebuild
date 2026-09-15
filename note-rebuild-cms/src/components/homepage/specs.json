@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_homepage_specs",
+  "info": {
+    "displayName": "Specs",
+    "icon": "layer"
+  },
+  "options": {},
+  "attributes": {
+    "headingLine1": {
+      "type": "string",
+      "required": true
+    },
+    "headingLine2": {
+      "type": "string",
+      "required": true
+    },
+    "penImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "homepage.spec-card"
+    }
+  }
+}

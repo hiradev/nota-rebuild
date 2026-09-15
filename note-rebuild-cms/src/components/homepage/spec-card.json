@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_homepage_spec_cards",
+  "info": {
+    "displayName": "Spec Card",
+    "icon": "layer"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "lines": {
+      "type": "component",
+      "repeatable": true,
+      "component": "homepage.spec-line"
+    }
+  }
+}

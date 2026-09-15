@@ -1,9 +1,5 @@
-/**
- * Stand-ins for real product photography/video/Lottie while the real
- * assets (see ASSETS.md) are dropped into /public. Replace the src
- * props once the real files are in place — the surrounding markup and
- * animation hooks (classNames) are already wired for the real tags.
- */
+/** Stand-ins for real photography/video/Lottie (see ASSETS.md) — markup
+ * and animation hooks are already wired for the real tags. */
 export function ImagePlaceholder({ label, className = "", style = {} }) {
   return (
     <div

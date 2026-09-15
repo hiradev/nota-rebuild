@@ -1,241 +1,190 @@
 {
   "global": {
-    "siteName": "Strapi Blog",
+    "siteName": "NŌTA",
+    "siteDescription": "NOTA smart pen — precision writing hardware with real-time digital continuity.",
+    "favicon": null,
     "defaultSeo": {
-      "metaTitle": "Page",
-      "metaDescription": "A blog made with Strapi",
-      "shareImage": null
-    },
-    "siteDescription": "A Blog made with Strapi",
-    "favicon": null
+      "metaTitle": "NŌTA | Writing Infrastructure for Modern Thinking",
+      "metaDescription": "NOTA smart pen — precision writing hardware with real-time digital continuity.",
+      "shareImage": null,
+      "keywords": "smart pen, digital notebook, handwriting, NOTA",
+      "canonicalURL": "",
+      "metaRobots": "index, follow"
+    }
   },
-  "about": {
-    "title": "About the strapi blog",
-    "blocks": [
-      {
-        "__component": "shared.quote",
-        "title": "Thelonius Monk",
-        "body": "You've got to dig it to dig it, you dig?"
-      },
-      {
-        "__component": "shared.rich-text",
-        "body": "## Dedit imago conspicuus cum capillis totidem inhibere\n\nLorem markdownum **rerum**, est limine: columbas: ab infelix hostem arbore nudis\ncrudelis. Videtur reliquit ambo ferrum dote sub amne fatis **illuc**, in magis,\nnec."
-      },
-      {
-        "__component": "shared.media",
-        "file": "coffee-art.jpg"
-      }
-    ]
+  "header": {
+    "nav": [
+      { "label": "Specifications", "href": "#specs" },
+      { "label": "Who it's for", "href": "#who" },
+      { "label": "About", "href": "#about" },
+      { "label": "Inside the box", "href": "#inside" }
+    ],
+    "cta": {
+      "orderLabel": "Order",
+      "productLabel": "Nota One",
+      "price": "$300"
+    },
+    "modal": {
+      "heading": "Stay ahead",
+      "body": "Launching soon. Get early access and insider updates.",
+      "inputPlaceholder": "Email address",
+      "submitLabel": "Notify me"
+    }
   },
-  "categories": [
-    {
-      "name": "news",
-      "slug": "news"
+  "footer": {
+    "tagline": "NŌTA creates tools that respect the way people think and write.\nNatural handwriting, quietly connected to digital structure.",
+    "contactLinks": [
+      { "label": "hello@nota.pen", "href": "mailto:hello@nota.pen", "external": false },
+      { "label": "Privacy", "href": "#privacy", "external": false }
+    ],
+    "creditLinks": [
+      { "label": "Made in Taptop", "href": "https://taptop.pro/", "external": true },
+      { "label": "Designed by Alice", "href": "https://www.behance.net/alicem", "external": true },
+      { "label": "& UPROCK Studio", "href": "https://www.uprock.ru/", "external": true }
+    ],
+    "copyrightText": "© 2026 NŌTA. All rights reserved."
+  },
+  "homepage": {
+    "hero": {
+      "headlineLine1": "Smart pen",
+      "headlineLine2": "for real thinking",
+      "lottieAnimation": "cover.json"
     },
-    {
-      "name": "tech",
-      "slug": "tech"
+    "specs": {
+      "headingLine1": "Nota pen",
+      "headingLine2": "Specifications",
+      "penImage": "specs-pen.png",
+      "cards": [
+        {
+          "title": "Writing System",
+          "lines": [
+            { "text": "Fountain pen nib" },
+            { "text": "Natural ink flow" },
+            { "text": "Replaceable fountain-pen ink cartridge" },
+            { "text": "Designed for precise, expressive handwriting" }
+          ]
+        },
+        {
+          "title": "Capture Technology",
+          "lines": [
+            { "text": "High-precision optical tracking" },
+            { "text": "Real-time stroke capture" },
+            { "text": "Line-by-line accuracy" },
+            { "text": "Supports handwriting, diagrams, sketches" }
+          ]
+        },
+        {
+          "title": "Digital Continuity",
+          "lines": [
+            { "text": "Notes sync automatically" },
+            { "text": "Searchable over time" },
+            { "text": "Structured with AI support" },
+            { "text": "Ready when you return" }
+          ]
+        }
+      ]
     },
-    {
-      "name": "food",
-      "slug": "food"
+    "who": {
+      "introText": "Some thoughts need time, space, and a physical trace to exist. Writing by hand creates focus, presence, and a deeper connection with ideas. This tool is built around that simple truth.",
+      "audienceLabel": "Who it's for:",
+      "audienceLines": [
+        { "text": "This tool is made for people who think on paper. It" },
+        { "text": "keeps handwriting natural and focused, letting you write the way you always have without distractions or screens getting in the way." },
+        { "text": "Everything you write syncs to the app, where" },
+        { "text": "your notes are organized, searchable, and ready to work with AI when you need more clarity or structure." }
+      ],
+      "theses": [
+        {
+          "title": "Students & Learners",
+          "body": "Handwritten notes stay personal and intuitive, but become searchable, organized, and easy to study. Lectures, ideas, and revisions are captured as they are — then supported by AI summaries, text recognition, and quick navigation when it matters most."
+        },
+        {
+          "title": "Creators, Designers & Architects",
+          "body": "Sketches, diagrams, concepts, and fragments of ideas belong on paper. This tool makes sure they don't disappear. Everything drawn or written is safely stored, easy to revisit, and ready to evolve into something bigger — without interrupting the creative flow."
+        },
+        {
+          "title": "Managers & Product Thinkers",
+          "body": "Meetings start on paper and end with structure. Notes turn into clear summaries, tasks, and follow-ups. The pen captures everything quietly, while the app helps organize decisions without pulling attention away from the room."
+        }
+      ],
+      "backgroundVideo": "who-video.mp4"
     },
-    {
-      "name": "nature",
-      "slug": "nature"
+    "paper": {
+      "coverHeadlineLine1": "Works with",
+      "coverHeadlineLine2": "smart paper",
+      "slides": [
+        {
+          "image": "paper-slide-1.webp",
+          "heading": "We use special paper with a nearly invisible pattern",
+          "body": "For the pen, it's a precise map.",
+          "description": "The pattern defines exact coordinates across the page, allowing the pen to capture every stroke with precision and consistency. For you, it feels like ordinary paper. For the system, it becomes a stable reference that turns handwriting into structured, accurate digital data."
+        },
+        {
+          "image": "paper-slide-2.webp",
+          "heading": "Looks like paper. Works like a system.",
+          "body": "For you, it's just a blank sheet.",
+          "description": "You write freely, without grids, guides, or visible markers. The paper feels clean and familiar, keeping your focus on ideas instead of tools. Nothing distracts you from the act of writing. Nothing changes in how you write - only what becomes possible after."
+        },
+        {
+          "image": "paper-slide-3.webp",
+          "heading": "No delays. No glitches. No random effects.",
+          "body": "AI-powered structure.",
+          "description": "Handwriting is processed in real time and enriched quietly in the background. AI recognizes text, structure, and context to organize notes, highlight key ideas, and connect thoughts over time. The technology stays invisible, so your focus remains fully on writing."
+        },
+        {
+          "image": "paper-slide-4.webp",
+          "heading": "Everything you write is synced to your phone in real time",
+          "body": "Your notes. Already there.",
+          "description": "Every note is instantly transferred to your device and safely stored in your personal space. Access your thoughts anytime, organize them effortlessly, and continue working across devices. Your handwriting becomes part of a system that is searchable, structured, and always available."
+        }
+      ]
     },
-    {
-      "name": "story",
-      "slug": "story"
+    "inside": {
+      "blinds": [
+        {
+          "image": "blinds-1.webp",
+          "title": "A complete, ready-to-use set",
+          "body": "Everything in one box: the pen, a notepad, a charging cable, and instructions — ready to write from day one."
+        },
+        {
+          "image": "blinds-2.webp",
+          "title": "Smart Pen",
+          "body": "Machined aluminum body, durable metal nib, and a low-profile control button."
+        },
+        {
+          "image": "blinds-3.webp",
+          "title": "Charging Adapter",
+          "body": "USB-C fast charge — 10 minutes on the dock covers a full day of writing."
+        }
+      ],
+      "tagline": "Built like a precision instrument. Priced like one you'd actually buy."
+    },
+    "details": {
+      "cards": [
+        { "image": "details-1.webp", "caption": "Flush-fit precision cap" },
+        { "image": null, "caption": "Durable metal nib, low-profile control button" },
+        { "image": "details-3.webp", "caption": "USB-C adapter — fast charging" },
+        { "image": "details-5.webp", "caption": "Aluminum body" },
+        { "image": null, "caption": "Bluetooth connectivity, up to 8 hours of active use" }
+      ],
+      "backgroundVideo": "details-video.mp4"
+    },
+    "colors": {
+      "slides": [
+        { "image": "color-1.webp", "taglineLine1": "Impossible to", "taglineLine2": "overthink" },
+        { "image": "color-2.webp", "taglineLine1": "Graphite Black.", "taglineLine2": "Clarity in silence." },
+        { "image": "color-3.webp", "taglineLine1": "Mist Blue.", "taglineLine2": "Light thinking." },
+        { "image": "color-4.webp", "taglineLine1": "Precision Red.", "taglineLine2": "Form follows thought." },
+        { "image": "color-5.webp", "taglineLine1": "Bright Orange.", "taglineLine2": "Steady focus." }
+      ]
+    },
+    "seo": {
+      "metaTitle": "NŌTA | Writing Infrastructure for Modern Thinking",
+      "metaDescription": "NOTA smart pen — precision writing hardware with real-time digital continuity.",
+      "shareImage": null,
+      "keywords": "smart pen, digital notebook, handwriting, NOTA",
+      "canonicalURL": "",
+      "metaRobots": "index, follow"
     }
-  ],
-  "authors": [
-    {
-      "name": "David Doe",
-      "email": "daviddoe@strapi.io",
-      "avatar": "daviddoe@strapi.io.jpg"
-    },
-    {
-      "name": "Sarah Baker",
-      "email": "sarahbaker@strapi.io",
-      "avatar": "sarahbaker@strapi.io.jpg"
-    }
-  ],
-  "articles": [
-    {
-      "title": "The internet's Own boy",
-      "slug": "the-internet-s-own-boy",
-      "category": {
-        "id": 5
-      },
-      "author": {
-        "id": 1
-      },
-      "description": "Follow the story of Aaron Swartz, the boy who could change the world",
-      "cover": null,
-      "blocks": [
-        {
-          "__component": "shared.rich-text",
-          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
-        },
-        {
-          "__component": "shared.quote",
-          "title": "Thelonius Monk",
-          "body": "You've got to dig it to dig it, you dig?"
-        },
-        {
-          "__component": "shared.media",
-          "file": "coffee-art.jpg"
-        },
-        {
-          "__component": "shared.rich-text",
-          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
-        },
-        {
-          "__component": "shared.slider",
-          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
-        }
-      ]
-    },
-    {
-      "title": "This shrimp is awesome",
-      "slug": "this-shrimp-is-awesome",
-      "category": {
-        "id": 4
-      },
-      "author": {
-        "id": 1
-      },
-      "description": "Mantis shrimps, or stomatopods, are marine crustaceans of the order Stomatopoda.",
-      "cover": null,
-      "blocks": [
-        {
-          "__component": "shared.rich-text",
-          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
-        },
-        {
-          "__component": "shared.quote",
-          "title": "Thelonius Monk",
-          "body": "You've got to dig it to dig it, you dig?"
-        },
-        {
-          "__component": "shared.media",
-          "file": "coffee-art.jpg"
-        },
-        {
-          "__component": "shared.rich-text",
-          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
-        },
-        {
-          "__component": "shared.slider",
-          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
-        }
-      ]
-    },
-    {
-      "title": "A bug is becoming a meme on the internet",
-      "slug": "a-bug-is-becoming-a-meme-on-the-internet",
-      "category": {
-        "id": 2
-      },
-      "author": {
-        "id": 2
-      },
-      "description": "How a bug on MySQL is becoming a meme on the internet",
-      "cover": null,
-      "blocks": [
-        {
-          "__component": "shared.rich-text",
-          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
-        },
-        {
-          "__component": "shared.quote",
-          "title": "Thelonius Monk",
-          "body": "You've got to dig it to dig it, you dig?"
-        },
-        {
-          "__component": "shared.media",
-          "file": "coffee-art.jpg"
-        },
-        {
-          "__component": "shared.rich-text",
-          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
-        },
-        {
-          "__component": "shared.slider",
-          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
-        }
-      ]
-    },
-    {
-      "title": "Beautiful picture",
-      "slug": "beautiful-picture",
-      "category": {
-        "id": 4
-      },
-      "author": {
-        "id": 2
-      },
-      "description": "Description of a beautiful picture",
-      "cover": null,
-      "blocks": [
-        {
-          "__component": "shared.rich-text",
-          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
-        },
-        {
-          "__component": "shared.quote",
-          "title": "Thelonius Monk",
-          "body": "You've got to dig it to dig it, you dig?"
-        },
-        {
-          "__component": "shared.media",
-          "file": "coffee-art.jpg"
-        },
-        {
-          "__component": "shared.rich-text",
-          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
-        },
-        {
-          "__component": "shared.slider",
-          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
-        }
-      ]
-    },
-    {
-      "title": "What's inside a Black Hole",
-      "slug": "what-s-inside-a-black-hole",
-      "category": {
-        "id": 1
-      },
-      "author": {
-        "id": 2
-      },
-      "description": "Maybe the answer is in this article, or not...",
-      "cover": null,
-      "blocks": [
-        {
-          "__component": "shared.rich-text",
-          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
-        },
-        {
-          "__component": "shared.quote",
-          "title": "Thelonius Monk",
-          "body": "You've got to dig it to dig it, you dig?"
-        },
-        {
-          "__component": "shared.media",
-          "file": "coffee-art.jpg"
-        },
-        {
-          "__component": "shared.rich-text",
-          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
-        },
-        {
-          "__component": "shared.slider",
-          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
-        }
-      ]
-    }
-  ]
+  }
 }

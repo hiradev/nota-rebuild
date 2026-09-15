@@ -21,6 +21,18 @@
       "multiple": false,
       "required": false,
       "allowedTypes": ["images"]
+    },
+    "keywords": {
+      "type": "text",
+      "required": false
+    },
+    "canonicalURL": {
+      "type": "string",
+      "required": false
+    },
+    "metaRobots": {
+      "type": "string",
+      "required": false
     }
   }
 }

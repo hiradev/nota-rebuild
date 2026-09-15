@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_homepage_colors",
+  "info": {
+    "displayName": "Colors",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "slides": {
+      "type": "component",
+      "repeatable": true,
+      "component": "homepage.color-slide"
+    }
+  }
+}

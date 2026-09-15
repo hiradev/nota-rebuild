@@ -1,4 +1,5 @@
 import { Inter, Instrument_Serif } from "next/font/google";
+import { getGlobal, getHomepage, strapiMediaUrl } from "@/lib/strapi";
 import "./globals.css";
 import "./sections.css";
 
@@ -17,11 +18,60 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-export const metadata = {
-  title: "NŌTA — Smart pen for real thinking",
-  description:
-    "NOTA smart pen — precision writing hardware with real-time digital continuity.",
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  colorScheme: "light",
 };
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+// This build reuses a design that isn't ours — kept live only for
+// investor/fundraising review, not for public discovery. Force noindex
+// unconditionally (ignore any CMS-set metaRobots) until the round closes,
+// at which point the site comes down entirely.
+const ROBOTS = "noindex, nofollow";
+
+export async function generateMetadata() {
+  const [global, homepage] = await Promise.all([getGlobal(), getHomepage()]);
+  // The homepage single type's own `seo` field overrides global.defaultSeo
+  // when an editor has filled it in; otherwise fall back to the site default.
+  const seo = homepage?.seo?.metaTitle ? homepage.seo : global?.defaultSeo;
+
+  if (!seo) {
+    const defaultSeo = global?.defaultSeo;
+    return {
+      metadataBase: new URL(SITE_URL),
+      title: global?.siteName,
+      description: global?.siteDescription,
+      keywords: defaultSeo?.keywords || undefined,
+      alternates: defaultSeo?.canonicalURL ? { canonical: defaultSeo.canonicalURL } : undefined,
+      robots: ROBOTS,
+    };
+  }
+
+  const shareImageUrl = strapiMediaUrl(seo.shareImage);
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    keywords: seo.keywords || undefined,
+    alternates: seo.canonicalURL ? { canonical: seo.canonicalURL } : undefined,
+    robots: ROBOTS,
+    openGraph: shareImageUrl
+      ? { title: seo.metaTitle, description: seo.metaDescription, images: [shareImageUrl] }
+      : undefined,
+    twitter: shareImageUrl
+      ? {
+          card: "summary_large_image",
+          title: seo.metaTitle,
+          description: seo.metaDescription,
+          images: [shareImageUrl],
+        }
+      : undefined,
+  };
+}
 
 export default function RootLayout({ children }) {
   return (

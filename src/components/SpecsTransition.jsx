@@ -11,13 +11,8 @@ export default function SpecsTransition() {
   useEffect(() => {
     const { gsap, ScrollTrigger } = ensureGsap();
     const ctx = gsap.context(() => {
-      // Black backdrop and curtain rise share one timeline/scrollTrigger
-      // (not two separate ones on the same trigger+start+end — GSAP only
-      // actually drives the first ScrollTrigger created against a given
-      // trigger element's identical range; a second one with the same
-      // numbers gets created but never updates on scroll) so black only
-      // ever shows in the sliver curtains haven't covered yet, instead of
-      // racing ahead and holding a solid black screen on its own.
+      // One shared timeline, not two separate ScrollTriggers on the same
+      // range — GSAP only drives the first one created for identical triggers.
       const curtains = curtainsRef.current.querySelectorAll(
         ".transition-specs__curtain"
       );
@@ -41,7 +36,11 @@ export default function SpecsTransition() {
   }, []);
 
   return (
-    <section className="transition-specs negative-margin--100-vh" ref={sectionRef}>
+    <section
+      className="transition-specs negative-margin--100-vh"
+      ref={sectionRef}
+      data-header-theme="light"
+    >
       <div className="transition-specs__camera">
         <div className="transition-specs__black-bg" ref={bgRef} />
         <div

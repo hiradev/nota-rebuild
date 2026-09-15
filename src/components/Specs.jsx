@@ -3,38 +3,14 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ensureGsap } from "@/lib/gsapSetup";
+import { strapiMediaUrl } from "@/lib/strapi";
 
-const CARDS = [
-  {
-    title: "Writing System",
-    rows: [
-      "Fountain pen nib",
-      "Natural ink flow",
-      "Replaceable fountain-pen ink cartridge",
-      "Designed for precise, expressive handwriting",
-    ],
-  },
-  {
-    title: "Capture Technology",
-    rows: [
-      "High-precision optical tracking",
-      "Real-time stroke capture",
-      "Line-by-line accuracy",
-      "Supports handwriting, diagrams, sketches",
-    ],
-  },
-  {
-    title: "Digital Continuity",
-    rows: [
-      "Notes sync automatically",
-      "Searchable over time",
-      "Structured with AI support",
-      "Ready when you return",
-    ],
-  },
-];
+export default function Specs({ data }) {
+  const headingLine1 = data?.headingLine1 || "";
+  const headingLine2 = data?.headingLine2 || "";
+  const penImageUrl = strapiMediaUrl(data?.penImage) || "/images/specs-pen.png";
+  const cards = data?.cards || [];
 
-export default function Specs() {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
   const textWrapRef = useRef(null);
@@ -90,9 +66,9 @@ export default function Specs() {
         }
       );
 
-      const cards = listRef.current.querySelectorAll(".specs-list__card");
+      const cardEls = listRef.current.querySelectorAll(".specs-list__card");
       gsap.fromTo(
-        cards,
+        cardEls,
         { yPercent: 140 },
         {
           yPercent: 0,
@@ -111,52 +87,52 @@ export default function Specs() {
   }, []);
 
   return (
-    <section className="specs" ref={sectionRef} id="specs">
+    <section className="specs" ref={sectionRef} id="specs" data-header-theme="light">
       <div className="specs__camera">
         <div className="specs__content bc--main-white" ref={contentRef}>
           <div className="specs__content-text-wrapper" ref={textWrapRef}>
-            <h2 className="headline--1 tc--gray">Nota pen</h2>
-            <h2 className="headline--1 tc--main-black">Specifications</h2>
+            <h2 className="headline--1 tc--gray">{headingLine1}</h2>
+            <h2 className="headline--1 tc--main-black">{headingLine2}</h2>
           </div>
 
-          <div className="specs-content__img-wrapper" ref={imgWrapRef}>
+          <figure className="specs-content__img-wrapper" ref={imgWrapRef}>
             <Image
-              src="/images/specs-pen.png"
+              src={penImageUrl}
               alt="Nota pen"
               width={233}
               height={734}
               className="specs__content--img"
             />
-          </div>
+          </figure>
 
-          <div className="specs-pack__list" ref={listRef}>
-            {CARDS.map((card) => (
-              <div className="specs-list__card" key={card.title}>
-                <div className="specs-card__top-content bc--black-2 effect--glass">
+          <ul className="specs-pack__list" ref={listRef}>
+            {cards.map((card) => (
+              <li className="specs-list__card" key={card.title}>
+                <div className="specs-card__top-content effect--glass-specs">
                   <h3 className="headline--3 tc--main-black">{card.title}</h3>
                 </div>
-                <div className="specs-card__bottom-content bc--black-2 effect--glass">
-                  {card.rows.map((label, i) => (
+                <div className="specs-card__bottom-content effect--glass-specs">
+                  {(card.lines || []).map((line, i, arr) => (
                     <div
                       className={`specs-card__bottom-info${
-                        i === card.rows.length - 1
+                        i === arr.length - 1
                           ? " specs-card__bottom-info--last"
                           : ""
                       }`}
-                      key={label}
+                      key={line.text}
                     >
                       <div className="specs-card__bottom-wrapper">
                         <span className="card-text tc--main-black">
-                          {label}
+                          {line.text}
                         </span>
                         <span className="specs-card__bottom-dot bc--black-20" />
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>

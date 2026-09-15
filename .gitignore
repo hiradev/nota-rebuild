@@ -3,3 +3,14 @@ node_modules
 out
 .DS_Store
 *.log
+.env
+.env.local
+.env*.local
+.agents
+.claude
+.playwright-mcp
+CLAUDE.md
+ASSETS.md
+AGENTS.md
+ASSET-URLS.md
+skills-lock.json

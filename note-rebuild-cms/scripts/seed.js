@@ -3,7 +3,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const mime = require('mime-types');
-const { categories, authors, articles, global, about } = require('../data/data.json');
+const { global, header, footer, homepage } = require('../data/data.json');
 
 async function seedExampleApp() {
   const shouldImportSeedData = await isFirstRun();
@@ -97,12 +97,15 @@ async function uploadFile(file, name) {
     });
 }
 
-// Create an entry and attach files if there are any
+// Create an entry and attach files if there are any. Strapi v5's Document
+// Service always creates a draft unless `status: 'published'` is passed
+// explicitly — setting `publishedAt` on the data alone (the v4 pattern)
+// is silently ignored for draftAndPublish-enabled content types.
 async function createEntry({ model, entry }) {
   try {
-    // Actually create the entry in Strapi
     await strapi.documents(`api::${model}.${model}`).create({
       data: entry,
+      status: 'published',
     });
   } catch (error) {
     console.error({ model, entry, error });
@@ -138,61 +141,21 @@ async function checkFileExistsBeforeUpload(files) {
   return allFiles.length === 1 ? allFiles[0] : allFiles;
 }
 
-async function updateBlocks(blocks) {
-  const updatedBlocks = [];
-  for (const block of blocks) {
-    if (block.__component === 'shared.media') {
-      const uploadedFiles = await checkFileExistsBeforeUpload([block.file]);
-      // Copy the block to not mutate directly
-      const blockCopy = { ...block };
-      // Replace the file name on the block with the actual file
-      blockCopy.file = uploadedFiles;
-      updatedBlocks.push(blockCopy);
-    } else if (block.__component === 'shared.slider') {
-      // Get files already uploaded to Strapi or upload new files
-      const existingAndUploadedFiles = await checkFileExistsBeforeUpload(block.files);
-      // Copy the block to not mutate directly
-      const blockCopy = { ...block };
-      // Replace the file names on the block with the actual files
-      blockCopy.files = existingAndUploadedFiles;
-      // Push the updated block
-      updatedBlocks.push(blockCopy);
-    } else {
-      // Just push the block as is
-      updatedBlocks.push(block);
-    }
-  }
-
-  return updatedBlocks;
-}
-
-async function importArticles() {
-  for (const article of articles) {
-    const cover = await checkFileExistsBeforeUpload([`${article.slug}.jpg`]);
-    const updatedBlocks = await updateBlocks(article.blocks);
-
-    await createEntry({
-      model: 'article',
-      entry: {
-        ...article,
-        cover,
-        blocks: updatedBlocks,
-        // Make sure it's not a draft
-        publishedAt: Date.now(),
-      },
-    });
-  }
+// Uploads a single named file (or resolves to null if the fileName is falsy —
+// several homepage cards reference real photography that doesn't exist yet).
+async function resolveSingleFile(fileName) {
+  if (!fileName) return null;
+  return checkFileExistsBeforeUpload([fileName]);
 }
 
 async function importGlobal() {
-  const favicon = await checkFileExistsBeforeUpload(['favicon.png']);
-  const shareImage = await checkFileExistsBeforeUpload(['default-image.png']);
+  const favicon = await resolveSingleFile(global.favicon);
+  const shareImage = await resolveSingleFile(global.defaultSeo.shareImage);
   return createEntry({
     model: 'global',
     entry: {
       ...global,
       favicon,
-      // Make sure it's not a draft
       publishedAt: Date.now(),
       defaultSeo: {
         ...global.defaultSeo,
@@ -202,56 +165,93 @@ async function importGlobal() {
   });
 }
 
-async function importAbout() {
-  const updatedBlocks = await updateBlocks(about.blocks);
-
-  await createEntry({
-    model: 'about',
+async function importHeader() {
+  return createEntry({
+    model: 'header',
     entry: {
-      ...about,
-      blocks: updatedBlocks,
-      // Make sure it's not a draft
+      ...header,
       publishedAt: Date.now(),
     },
   });
 }
 
-async function importCategories() {
-  for (const category of categories) {
-    await createEntry({ model: 'category', entry: category });
-  }
+async function importFooter() {
+  return createEntry({
+    model: 'footer',
+    entry: {
+      ...footer,
+      publishedAt: Date.now(),
+    },
+  });
 }
 
-async function importAuthors() {
-  for (const author of authors) {
-    const avatar = await checkFileExistsBeforeUpload([author.avatar]);
+async function importHomepage() {
+  const heroLottie = await resolveSingleFile(homepage.hero.lottieAnimation);
+  const specsPenImage = await resolveSingleFile(homepage.specs.penImage);
+  const whoVideo = await resolveSingleFile(homepage.who.backgroundVideo);
+  const detailsVideo = await resolveSingleFile(homepage.details.backgroundVideo);
+  const seoShareImage = await resolveSingleFile(homepage.seo.shareImage);
 
-    await createEntry({
-      model: 'author',
-      entry: {
-        ...author,
-        avatar,
-      },
-    });
-  }
+  const paperSlides = await Promise.all(
+    homepage.paper.slides.map(async (slide) => ({
+      ...slide,
+      image: await resolveSingleFile(slide.image),
+    }))
+  );
+
+  const blinds = await Promise.all(
+    homepage.inside.blinds.map(async (blind) => ({
+      ...blind,
+      image: await resolveSingleFile(blind.image),
+    }))
+  );
+
+  const detailCards = await Promise.all(
+    homepage.details.cards.map(async (card) => ({
+      ...card,
+      image: await resolveSingleFile(card.image),
+    }))
+  );
+
+  const colorSlides = await Promise.all(
+    homepage.colors.slides.map(async (slide) => ({
+      ...slide,
+      image: await resolveSingleFile(slide.image),
+    }))
+  );
+
+  return createEntry({
+    model: 'homepage',
+    entry: {
+      ...homepage,
+      publishedAt: Date.now(),
+      hero: { ...homepage.hero, lottieAnimation: heroLottie },
+      specs: { ...homepage.specs, penImage: specsPenImage },
+      who: { ...homepage.who, backgroundVideo: whoVideo },
+      paper: { ...homepage.paper, slides: paperSlides },
+      inside: { ...homepage.inside, blinds },
+      details: { cards: detailCards, backgroundVideo: detailsVideo },
+      colors: { slides: colorSlides },
+      seo: { ...homepage.seo, shareImage: seoShareImage },
+    },
+  });
 }
 
 async function importSeedData() {
-  // Allow read of application content types
+  // Allow public read of homepage content; only public create for waitlist submissions.
   await setPublicPermissions({
-    article: ['find', 'findOne'],
-    category: ['find', 'findOne'],
-    author: ['find', 'findOne'],
-    global: ['find', 'findOne'],
-    about: ['find', 'findOne'],
+    global: ['find'],
+    header: ['find'],
+    footer: ['find'],
+    homepage: ['find'],
+    'waitlist-submission': ['create'],
   });
 
   // Create all entries
-  await importCategories();
-  await importAuthors();
-  await importArticles();
   await importGlobal();
-  await importAbout();
+  await importHeader();
+  await importFooter();
+  await importHomepage();
 }
 
 async function main() {

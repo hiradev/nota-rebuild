@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_homepage_papers",
+  "info": {
+    "displayName": "Paper",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "coverHeadlineLine1": {
+      "type": "string",
+      "required": true
+    },
+    "coverHeadlineLine2": {
+      "type": "string",
+      "required": true
+    },
+    "slides": {
+      "type": "component",
+      "repeatable": true,
+      "component": "homepage.paper-slide"
+    }
+  }
+}

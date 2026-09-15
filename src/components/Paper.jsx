@@ -2,51 +2,49 @@
 
 import { useEffect, useRef } from "react";
 import { ensureGsap } from "@/lib/gsapSetup";
+import { strapiMediaUrl } from "@/lib/strapi";
 import Image from "next/image";
 
-const SLIDES = [
-  {
-    id: 1,
-    image: "/images/paper-slide-1.webp",
-    heading: "We use special paper with a nearly invisible pattern",
-    body: "For the pen, it's a precise map.",
-  },
-  {
-    id: 2,
-    image: "/images/paper-slide-2.webp",
-    heading: "Looks like paper",
-    body: "For you, it's just a blank sheet.",
-  },
-  {
-    id: 3,
-    image: "/images/paper-slide-3.webp",
-    heading: "No delays. No glitches. No random effects.",
-    body: "AI-powered structure.",
-  },
-  {
-    id: 4,
-    image: "/images/paper-slide-4.webp",
-    heading: "Everything you write is synced to your phone in real time",
-    body: "Your notes. Already there.",
-  },
-];
+export default function Paper({ data }) {
+  const coverHeadlineLine1 = data?.coverHeadlineLine1 || "";
+  const coverHeadlineLine2 = data?.coverHeadlineLine2 || "";
+  const slides = (data?.slides || []).map((slide, i) => ({
+    id: i,
+    image: strapiMediaUrl(slide.image),
+    heading: slide.heading,
+    body: slide.body,
+    description: slide.description,
+  }));
 
-export default function Paper() {
   const sectionRef = useRef(null);
   const coverRef = useRef(null);
   const curtainsRef = useRef(null);
   const slideRefs = useRef([]);
   const imageRefs = useRef([]);
   const dotsRef = useRef([]);
+  const blackoutRef = useRef(null);
 
   useEffect(() => {
     const { gsap, ScrollTrigger } = ensureGsap();
     const ctx = gsap.context(() => {
-      // Six-column wipe revealing the section under the black cover. Both
-      // the cover and curtains stay black (not white) - per the reference
-      // audit this carousel continues on a black background the whole way
-      // through and only flips to white after it hands off to the next
-      // section.
+      // Timing is anchored to Who's non-sticky .who__video-content (not
+      // percentages of .paper's own sticky height — unreliable, see Who.jsx).
+      const WHO_CAMERA_VH = 100; // .who__video-camera's height
+      const PAPER_OVERLAP_VH = 100; // .paper's margin-top in sections.css
+      const whoReleaseMarker = ScrollTrigger.create({
+        trigger: document.querySelector(".who__video-content"),
+        start: "bottom bottom",
+      });
+      const vh = (n) => (n / 100) * window.innerHeight;
+      const paperLockPoint = () =>
+        whoReleaseMarker.start + vh(WHO_CAMERA_VH - PAPER_OVERLAP_VH);
+      const lockPlus = (vhAmount) => () => paperLockPoint() + vh(vhAmount);
+
+      // No separate slide-up tween on the cover: the overlap margin's
+      // native scroll already produces that motion — adding one double-counted it.
+
+      // Six-column white wipe reveals the carousel. Stagger runs from the
+      // LAST curtain first, matching the reference site's own wipe direction.
       const curtains = curtainsRef.current.querySelectorAll(
         ".paper__curtain"
       );
@@ -56,17 +54,18 @@ export default function Paper() {
         {
           height: "100vh",
           ease: "none",
-          stagger: 0.03,
+          stagger: { each: 0.03, from: "end" },
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top top",
-            end: "10% top",
+            start: lockPlus(0),
+            end: lockPlus(60),
             scrub: true,
           },
         }
       );
 
-      // Black cover dissolves away
+      // Finishes well before the curtain exit ends, so the cover is fully
+      // gone (not a faint ghost) while curtains are still mid-exit.
       gsap.fromTo(
         coverRef.current,
         { autoAlpha: 1 },
@@ -75,18 +74,41 @@ export default function Paper() {
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "5% top",
-            end: "18% top",
+            start: lockPlus(30),
+            end: lockPlus(75),
             scrub: true,
           },
         }
       );
 
-      // Slides 2-4 cross-fade in with a slow zoom-out; each occupies an
-      // equal band of the 600vh track after the cover reveal.
-      const bandStart = 0.2;
-      const bandEnd = 0.95;
-      const perSlide = (bandEnd - bandStart) / (SLIDES.length - 1);
+      // Exits via yPercent 0->100 (dropping off-stage), not a height
+      // shrink — keeps full 100vh height, stagger reversed to leftmost-first.
+      gsap.fromTo(
+        curtains,
+        { yPercent: 0 },
+        {
+          yPercent: 100,
+          ease: "none",
+          stagger: 0.03,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: lockPlus(72),
+            end: lockPlus(108),
+            scrub: true,
+          },
+        }
+      );
+
+      // Slides 2-4 cross-fade in equal bands after the cover reveal.
+      // bandEndVh must stay well under (.paper's height - 100vh camera unstick point).
+      const bandStartVh = 120;
+      const bandEndVh = 470;
+      const perSlideVh = (bandEndVh - bandStartVh) / (slides.length - 1);
+
+      // Each band holds a static pause, then a quick crossfade (not
+      // stretched full-band) — the Ken Burns zoom still runs full-band width.
+      const delayVh = 25;
+      const fadeVh = 20;
 
       const setActiveDot = (index) => {
         dotsRef.current.forEach((d, di) =>
@@ -94,9 +116,12 @@ export default function Paper() {
         );
       };
 
-      SLIDES.slice(1).forEach((slide, i) => {
-        const start = bandStart + i * perSlide;
-        const end = start + perSlide;
+      slides.slice(1).forEach((slide, i) => {
+        const startVh = bandStartVh + i * perSlideVh;
+        const endVh = startVh + perSlideVh;
+        const fadeStartVh = startVh + delayVh;
+        const fadeEndVh = fadeStartVh + fadeVh;
+
         gsap.fromTo(
           slideRefs.current[i + 1],
           { autoAlpha: 0 },
@@ -105,32 +130,35 @@ export default function Paper() {
             ease: "none",
             scrollTrigger: {
               trigger: sectionRef.current,
-              start: `${start * 100}% top`,
-              end: `${end * 100}% top`,
+              start: lockPlus(fadeStartVh),
+              end: lockPlus(fadeEndVh),
               scrub: true,
             },
           }
         );
-        gsap.fromTo(
-          imageRefs.current[i + 1],
-          { scale: 1.4 },
-          {
-            scale: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: `${start * 100}% top`,
-              end: `${end * 100}% top`,
-              scrub: true,
-            },
-          }
-        );
-
-        // pagination swap
+        // Ken Burns zoom is forward-only: tracks max progress reached (not a
+        // plain bidirectional scrub) so scrolling back up doesn't reverse it.
+        gsap.set(imageRefs.current[i + 1], { scale: 1.4 });
+        let maxZoomProgress = 0;
         ScrollTrigger.create({
           trigger: sectionRef.current,
-          start: `${start * 100}% top`,
-          end: `${end * 100}% top`,
+          start: lockPlus(startVh),
+          end: lockPlus(endVh),
+          onUpdate: (self) => {
+            if (self.progress > maxZoomProgress) {
+              maxZoomProgress = self.progress;
+              gsap.set(imageRefs.current[i + 1], {
+                scale: 1.4 - 0.4 * maxZoomProgress,
+              });
+            }
+          },
+        });
+
+        // pagination swap - flips right as the quick fade kicks in.
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: lockPlus(fadeStartVh),
+          end: lockPlus(fadeEndVh),
           scrub: true,
           onToggle: (self) => {
             if (self.isActive) {
@@ -144,19 +172,37 @@ export default function Paper() {
           },
         });
       });
+
+      // Fades to black before lockPlus(500) so InsideTransition's rise (which
+      // starts 100vh before its own pin point) reads as black-on-black, not a slide.
+      gsap.fromTo(
+        blackoutRef.current,
+        { autoAlpha: 0 },
+        {
+          autoAlpha: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: lockPlus(480),
+            end: lockPlus(500),
+            scrub: true,
+          },
+        }
+      );
     }, sectionRef);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="paper" ref={sectionRef}>
+    <section className="paper" ref={sectionRef} data-header-theme="dark">
       <div className="paper__camera">
-        {SLIDES.slice()
+        {slides
+          .slice()
           .reverse()
           .map((slide, revIdx) => {
-            const idx = SLIDES.length - 1 - revIdx;
+            const idx = slides.length - 1 - revIdx;
             return (
-              <div
+              <article
                 className="paper__slide"
                 key={slide.id}
                 ref={(el) => (slideRefs.current[idx] = el)}
@@ -166,14 +212,16 @@ export default function Paper() {
                   ref={(el) => (imageRefs.current[idx] = el)}
                   style={{ position: "absolute", inset: 0 }}
                 >
-                  <Image
-                    src={slide.image}
-                    alt={slide.heading}
-                    fill
-                    style={{ objectFit: "cover" }}
-                    sizes="100vw"
-                    priority={idx === 0}
-                  />
+                  {slide.image ? (
+                    <Image
+                      src={slide.image}
+                      alt={slide.heading}
+                      fill
+                      style={{ objectFit: "cover" }}
+                      sizes="100vw"
+                      priority={idx === 0}
+                    />
+                  ) : null}
                 </div>
                 <div className="paper__slide-container">
                   <h3 className="paper__heading large-text--1 tc--main-white">
@@ -182,21 +230,25 @@ export default function Paper() {
                   <div className="paper__description">
                     <div className="paper__plate">
                       <h4 className="headline--3 tc--main-white">
-                        {slide.heading}
+                        {slide.body}
                       </h4>
                     </div>
-                    <div className="paper__plate">
-                      <p className="main-text tc--main-white">{slide.body}</p>
-                    </div>
+                    {slide.description ? (
+                      <div className="paper__plate">
+                        <p className="main-text tc--main-white">
+                          {slide.description}
+                        </p>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
-              </div>
+              </article>
             );
           })}
 
-        <div className="paper__pagination">
-          {SLIDES.map((slide, i) => (
-            <div
+        <ul className="paper__pagination">
+          {slides.map((slide, i) => (
+            <li
               className={`paper__pagination-item${
                 i === 0 ? " paper__pagination-item--active" : ""
               }`}
@@ -204,12 +256,12 @@ export default function Paper() {
               ref={(el) => (dotsRef.current[i] = el)}
             />
           ))}
-        </div>
+        </ul>
 
-        <div className="paper__cover bc--main-black" ref={coverRef}>
-          <h2 className="page__heading headline--2 tc--gray">Works with</h2>
-          <h2 className="page__heading headline--2 tc--main-white">
-            smart paper
+        <div className="paper__cover bc--main-white" ref={coverRef}>
+          <h2 className="page__heading headline--2 tc--gray">{coverHeadlineLine1}</h2>
+          <h2 className="page__heading headline--2 tc--main-black">
+            {coverHeadlineLine2}
           </h2>
         </div>
 
@@ -223,6 +275,8 @@ export default function Paper() {
             />
           ))}
         </div>
+
+        <div className="paper__blackout" ref={blackoutRef} />
       </div>
     </section>
   );

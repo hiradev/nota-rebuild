@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_homepage_heroes",
+  "info": {
+    "displayName": "Hero",
+    "icon": "star"
+  },
+  "options": {},
+  "attributes": {
+    "headlineLine1": {
+      "type": "string",
+      "required": true
+    },
+    "headlineLine2": {
+      "type": "string",
+      "required": true
+    },
+    "lottieAnimation": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["files"]
+    }
+  }
+}

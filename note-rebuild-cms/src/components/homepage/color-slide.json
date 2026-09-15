@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_homepage_color_slides",
+  "info": {
+    "displayName": "Color Slide",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "taglineLine1": {
+      "type": "string",
+      "required": true
+    },
+    "taglineLine2": {
+      "type": "string",
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_layout_waitlist_modals",
+  "info": {
+    "displayName": "Waitlist Modal",
+    "icon": "envelope"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "required": true
+    },
+    "body": {
+      "type": "text",
+      "required": true
+    },
+    "inputPlaceholder": {
+      "type": "string",
+      "required": true
+    },
+    "submitLabel": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

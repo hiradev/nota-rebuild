@@ -1,9 +1,5 @@
-/* =========================================================================
-   NOTA — Section architecture
-   The "camera" scroll system: tall tracks containing a 100vh sticky camera,
-   stitched together with negative margins so scenes overlap/cross-fade.
-   Track map (desktop, >=992px only — see .desktop-experience in globals.css)
-   ========================================================================= */
+/* NOTA — Section architecture. Tall tracks with a 100vh sticky "camera",
+   stitched via negative margins so scenes overlap/cross-fade (desktop >=992px only). */
 
 .black-bg__wrapper {
   position: relative;
@@ -30,12 +26,22 @@
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 100;
+  transition: transform 320ms ease;
+}
+.header--hidden {
+  transform: translateY(-100%);
 }
 .header__wrapper {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding-top: 1.51vw;
+}
+@media (max-width: 991px) {
+  .header__wrapper {
+    align-items: center;
+    padding-top: 4vw;
+  }
 }
 .header__links {
   display: flex;
@@ -46,6 +52,7 @@
   display: flex;
   align-items: center;
   color: var(--main-white);
+  transition: color 200ms ease;
 }
 .header__wordmark svg {
   width: 3.69vw;
@@ -56,6 +63,12 @@
 .header__nav {
   display: flex;
   column-gap: 2.02vw;
+  color: var(--main-white);
+  transition: color 200ms ease;
+}
+.header[data-theme="light"] .header__wordmark,
+.header[data-theme="light"] .header__nav {
+  color: var(--main-black);
 }
 .header__nav a {
   position: relative;
@@ -65,6 +78,11 @@
 }
 .header__nav a:hover {
   border-bottom-color: currentColor;
+}
+@media (max-width: 991px) {
+  .header__nav {
+    display: none;
+  }
 }
 .header__cta {
   padding: 0.7vw 1.5vw;
@@ -79,40 +97,173 @@
 }
 .header__order {
   display: flex;
-  align-items: center;
-  column-gap: 1.11vw;
+  justify-content: space-between;
+  align-items: flex-start;
   background: var(--main-white);
-  border-radius: 100vw;
-  padding: 0.56vw 0.56vw 0.56vw 1.67vw;
+  border-radius: var(--radius-flat);
+  padding: 1.01vw;
+  width: 34.27vw;
+}
+@media (max-width: 991px) {
+  .header__order {
+    width: auto;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 1.11vw;
+    background: none;
+    padding: 0;
+  }
+  .header__order-cta {
+    display: none;
+  }
+}
+@media (min-width: 1440px) {
+  .header__order {
+    width: 29.86vw;
+    padding: 1.39vw;
+  }
+}
+@media (min-width: 1920px) {
+  .header__order {
+    width: 22.4vw;
+    padding: 1.04vw;
+  }
 }
 .header__order-icon {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 3.83vw;
+  height: 4.03vw;
+  padding: 0;
+}
+@media (max-width: 991px) {
+  .header__order-icon {
+    width: 6.4vw;
+    height: 6.4vw;
+    min-width: 26px;
+    min-height: 26px;
+  }
+}
+
+.header__menu-toggle {
+  display: none;
+}
+@media (max-width: 991px) {
+  .header__menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6.4vw;
+    height: 6.4vw;
+    min-width: 26px;
+    min-height: 26px;
+    color: var(--main-white);
+    transition: color 200ms ease;
+  }
+  .header[data-theme="light"] .header__menu-toggle {
+    color: var(--main-black);
+  }
+  .header__menu-toggle svg {
+    width: 60%;
+    height: 60%;
+  }
+}
+
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #000;
+  color: var(--main-white);
+  display: flex;
+  flex-direction: column;
+  padding: 6vw;
+}
+.mobile-nav__close {
+  align-self: flex-end;
+  width: 8vw;
+  height: 8vw;
+  min-width: 32px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-nav__close svg {
+  width: 40%;
+  height: 40%;
+}
+.mobile-nav__links {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6vw;
+  margin-top: 10vw;
+}
+.mobile-nav__links a {
+  font-family: var(--font-instrument-serif), serif;
+  font-size: 9vw;
+  letter-spacing: -0.03em;
+}
+.mobile-nav__cta {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1.5vw;
+  background: var(--main-white);
+  color: var(--main-black);
+  border-radius: var(--radius-flat);
+  padding: 4.5vw;
+}
+.mobile-nav__cta span:nth-child(2) {
+  color: var(--gray);
+}
+@media (min-width: 1440px) {
+  .header__order-icon {
+    width: 2.64vw;
+    height: 2.78vw;
+  }
+}
+@media (min-width: 1920px) {
+  .header__order-icon {
+    width: 1.98vw;
+    height: 2.08vw;
+  }
 }
 .header__order-icon img {
   display: block;
-  width: 0.83vw;
-  min-width: 12px;
-  height: auto;
+  width: 100%;
+  height: 100%;
 }
 .header__order-cta {
   display: flex;
   align-items: center;
-  column-gap: 0.42vw;
-  background: color-mix(in srgb, var(--accent) 22%, black);
+  column-gap: 1.01vw;
+  background: var(--main-black);
   color: var(--main-white);
-  border-radius: 100vw;
-  padding: 0.83vw 1.39vw;
-  font-size: 0.83vw;
+  border-radius: var(--radius-flat);
+  padding: 1.51vw;
   white-space: nowrap;
   transition: background 200ms ease;
+}
+@media (min-width: 1440px) {
+  .header__order-cta {
+    padding: 1.39vw;
+    column-gap: 0.69vw;
+  }
+}
+@media (min-width: 1920px) {
+  .header__order-cta {
+    padding: 1.04vw;
+    column-gap: 0.52vw;
+  }
 }
 .header__order-cta:hover {
   background: var(--accent);
 }
 .header__order-cta-product {
-  color: var(--white-50);
+  color: var(--white-40);
 }
 .header__order-dot {
   width: 0.28vw;
@@ -120,7 +271,7 @@
   min-width: 3px;
   min-height: 3px;
   border-radius: 50%;
-  background: var(--white-50);
+  background: var(--main-white);
 }
 
 /* ---------- 1. Cover / Hero ---------- */
@@ -198,11 +349,8 @@
 .transition-specs__curtain {
   background: var(--main-white);
   border-right: 1px solid rgba(0, 0, 0, 0.2);
-  /* No static transform here — GSAP's fromTo({yPercent:100}, ...) sets the
-     initial hidden position via its own inline transform. A static CSS
-     transform on this selector composites with (doesn't replace) GSAP's
-     translate(), leaving curtains visually stuck ~800px offset regardless
-     of the correctly-animating yPercent value. */
+  /* No static transform: it would composite with (not replace) GSAP's
+     own translate(), leaving curtains stuck offset. */
 }
 
 /* ---------- 3. Specifications ---------- */
@@ -265,6 +413,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  margin: 0;
 }
 .specs__content--img {
   height: 71.12vh;
@@ -285,6 +434,8 @@
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 1.01vw;
   padding: 0 3.63vw 12.67vh;
+  list-style: none;
+  margin: 0;
 }
 @media (min-width: 1440px) {
   .specs-pack__list {
@@ -336,7 +487,9 @@
 
 /* ---------- 4. Who transition ---------- */
 .who-transition {
-  height: 180vh;
+  /* Wipe timing is anchored to #specs (whoTransitionTiming.js), not this
+     section, so the hold must cover that offset + wipe + fade with cushion. */
+  height: 480vh;
   margin-top: -70vh;
   position: relative;
 }
@@ -368,6 +521,8 @@
   background: #000;
 }
 .who__text-content {
+  /* Char-highlight (Who.jsx) runs full length to "bottom top"; text2
+     fades in at its 50% midpoint, so no extra dwell padding needed. */
   height: 180vh;
   position: relative;
 }
@@ -401,7 +556,7 @@
   align-items: flex-end;
 }
 .who__descriptor-wrapper {
-  max-width: 68.55vw;
+  max-width: 45.55vw;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -426,17 +581,77 @@
   width: 43.35vw;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   row-gap: 0.6vw;
-  text-align: right;
+  text-align: left;
+}
+/* Staircase: narrower width shifts the start edge right while the end
+   edge stays anchored (align-items: flex-end) — margin-left has no effect here. */
+.thesis__content:last-child {
+  width: 30vw;
+}
+@media (max-width: 991px) {
+  .thesis__content {
+    width: 63.15vw;
+    row-gap: 0.78vw;
+  }
+}
+@media (max-width: 767px) {
+  .thesis__content {
+    width: 100%;
+    row-gap: 1.46vw;
+  }
+}
+@media (max-width: 479px) {
+  .thesis__content {
+    row-gap: 2.19vw;
+  }
+}
+@media (min-width: 1440px) {
+  .thesis__content {
+    width: 29.86vw;
+    row-gap: 0.49vw;
+  }
+}
+@media (min-width: 1920px) {
+  .thesis__content {
+    width: 22.4vw;
+    row-gap: 0.36vw;
+  }
+}
+.thesis__content h3 {
+  width: 100%;
 }
 .thesis__content p {
   width: 34.88vw;
   max-width: 100%;
+  margin-left: 8vw;
+}
+@media (max-width: 991px) {
+  .thesis__content p {
+    width: 47.92vw;
+  }
+}
+@media (max-width: 767px) {
+  .thesis__content p {
+    width: 100%;
+  }
+}
+@media (min-width: 1440px) {
+  .thesis__content p {
+    width: 24.1vw;
+  }
+}
+@media (min-width: 1920px) {
+  .thesis__content p {
+    width: 18.13vw;
+  }
 }
 
+/* Grow -> hold -> shrink pen-video reveal. Height = sum of the matching
+   *_VH constants in Who.jsx — keep both in sync if either changes. */
 .who__video-content {
-  height: 180vh;
+  height: 320vh;
   position: relative;
 }
 .who__video-camera {
@@ -444,21 +659,34 @@
   position: sticky;
   top: 0;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+.who__video-box {
+  position: absolute;
+  right: 2.32vw;
+  top: 2.32vw;
+  width: 44vw;
+  height: 36vh;
+  overflow: hidden;
+  background: var(--main-black, #000);
+  /* Shrink-out scales this in place, center-anchored, not toward a corner. */
+  transform-origin: center;
 }
 .who__video,
 .who__video-placeholder {
-  height: 46.57vw;
   width: 100%;
+  height: 100%;
   object-fit: cover;
-  transform-origin: 100% 0%;
 }
 
 /* ---------- 6. Paper ---------- */
+/* Overlaps Who's pen-video hold by 100vh so this section climbs up while
+   the pen shrinks. Paper.jsx uses vh-offsets from a camera-lock marker, not
+   percentages of this sticky element's own height (that was unreliable). */
 .paper {
-  height: 600vh;
+  /* 700vh, not 600 - see Paper.jsx's bandEndVh comment; 600 left only
+     a 30vh buffer before the next section's handoff began. */
+  height: 700vh;
+  margin-top: -100vh;
   position: sticky;
   top: 0;
 }
@@ -490,6 +718,7 @@
 }
 .paper__heading {
   align-self: flex-start;
+  max-width: 26vw;
 }
 .paper__description {
   align-self: flex-end;
@@ -510,7 +739,19 @@
   transform: translateX(-50%);
   display: flex;
   column-gap: 0.5vw;
+  list-style: none;
+  margin: 0;
   z-index: 5;
+}
+.paper__blackout {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  /* Above pagination (5) so the fade-to-black covers the whole frame. */
+  z-index: 10;
 }
 .paper__pagination-item {
   width: 8.06vw;
@@ -528,6 +769,9 @@
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  /* Must outrank slide 0 (opaque by default) but stay below curtains (4)
+     and pagination (5) so the wipe still plays visibly over this. */
+  z-index: 2;
 }
 .paper__curtains {
   position: absolute;
@@ -537,10 +781,10 @@
   z-index: 4;
 }
 .paper__curtain {
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
   height: 0vh;
   align-self: start;
-  background: var(--main-black);
+  background: var(--main-white);
 }
 .paper__curtain--last {
   border-right-color: transparent;
@@ -586,7 +830,12 @@
 }
 .inside__complete-wrapper {
   height: 100vh;
-  padding: 2.02vw 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.inside__complete-wrapper .inside__blinds-item {
+  width: 100%;
 }
 .inside__text-wrapper {
   height: 100vh;
@@ -737,7 +986,9 @@
 
 /* ---------- 10. Colours ---------- */
 .section-colors {
-  height: 350vh;
+  /* 420vh, not 350 - extra 70vh is pure hold time for slide 5
+     (see Colors.jsx's perSlide comment), same pattern as .paper above. */
+  height: 420vh;
   position: sticky;
   top: 0;
 }
@@ -769,6 +1020,10 @@
   justify-content: space-between;
   padding: 0 var(--container-pad);
 }
+.section-colors__text-wrapper,
+.section-colors__text-wrapper2 {
+  margin: 0;
+}
 .section-colors__text-wrapper2 {
   display: flex;
   justify-content: flex-end;
@@ -783,6 +1038,8 @@
   display: flex;
   column-gap: 0.5vw;
   z-index: 5;
+  list-style: none;
+  margin: 0;
 }
 .pagination-dot {
   width: 8.06vw;
@@ -795,11 +1052,8 @@
 }
 
 /* ---------- 11. Footer ---------- */
-/* Not sticky: the previous section (.section-colors) is already the
-   pinned "camera," so footer only needs to sit in normal flow right
-   after it. A sticky/bottom rule here (no top) rendered the footer at
-   the top of the whole page in Chromium once sibling sticky sections
-   started pinning correctly — same class of bug as .cover below. */
+/* Not sticky: .section-colors is already the pinned camera; a sticky
+   rule here rendered the footer at the page top in Chromium. */
 .footer {
   position: relative;
   z-index: 1;
@@ -838,6 +1092,9 @@
   display: flex;
   flex-direction: column;
   row-gap: 0.5vw;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 .footer-link--white,
 .footer-link--gray {
@@ -881,19 +1138,56 @@
   display: flex;
   column-gap: 0.5vw;
 }
+@media (max-width: 991px) {
+  .footer__content {
+    height: auto;
+    min-height: 0;
+    row-gap: 8vw;
+    padding: 12vw 0 10vw;
+  }
+  .footer__content-top {
+    flex-direction: column;
+    gap: 8vw;
+  }
+  .footer__description {
+    max-width: none;
+  }
+  .footer__info-wrapper {
+    justify-content: space-between;
+    column-gap: 4vw;
+  }
+  .footer__content-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4vw;
+  }
+  .footer__team-wrapper {
+    flex-direction: column;
+    row-gap: 3vw;
+  }
+  .footer__team {
+    width: 100%;
+    min-width: 0;
+  }
+}
 
 /* ---------- Static (<992px) fallback ---------- */
 .static-experience section {
-  padding: 12vw 5vw;
+  padding: 16vw 5.5vw;
 }
 .static-experience .static-hero {
-  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  justify-content: flex-end;
   background: var(--main-radial);
+  padding-bottom: 12vw;
+}
+.static-hero__media {
+  position: relative;
+  flex: 1;
+  min-height: 38vh;
+  margin: 4vw 0 8vw;
 }
 .static-experience .static-black {
   background: #000;
@@ -902,15 +1196,135 @@
   background: var(--main-white);
   color: var(--main-black);
 }
-.static-experience .static-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 4vw;
-  margin-top: 6vw;
+
+/* -- Specs -- */
+.static-specs__pen {
+  margin: 8vw 0;
 }
-.static-experience .static-card {
+@media (max-width: 991px) {
+  .specs-pack__list {
+    grid-template-columns: 1fr;
+    padding: 0;
+    row-gap: 4vw;
+  }
+}
+
+/* -- Who -- */
+.static-who__audience {
+  margin-top: 10vw;
+  display: flex;
+  flex-direction: column;
+  row-gap: 3vw;
+}
+.static-who__audience-lines {
+  display: flex;
+  flex-direction: column;
+}
+.static-who__theses {
+  margin-top: 12vw;
+  display: flex;
+  flex-direction: column;
+  row-gap: 9vw;
+}
+.static-who__theses p {
+  margin-top: 2.5vw;
+}
+.static-who__media {
+  position: relative;
+  margin-top: 10vw;
+  border-radius: 4vw;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+.static-who__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* -- Paper -- */
+@media (max-width: 991px) {
+  .paper__heading {
+    max-width: none;
+  }
+  .paper__plate {
+    width: 100%;
+  }
+}
+.static-paper__slides {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5vw;
+  margin-top: 8vw;
+}
+.static-paper__slide {
+  position: relative;
+  border-radius: 4vw;
+  overflow: hidden;
+  height: 130vw;
+  background: #000;
+}
+.static-paper__slide .paper__slide-container {
+  position: absolute;
+  inset: 0;
+}
+.static-paper__pagination {
+  position: static;
+  transform: none;
+  justify-content: center;
+  margin-top: 7vw;
+}
+
+/* -- Inside -- */
+.static-inside__kit,
+.static-inside__device {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5vw;
+}
+.static-inside__media {
+  position: relative;
+  margin-top: 4vw;
+  border-radius: 4vw;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--black-2);
+}
+.static-inside__tagline {
+  margin: 14vw 0;
+  text-align: center;
+}
+.static-inside__devices {
+  display: flex;
+  flex-direction: column;
+  row-gap: 11vw;
+  margin-top: 7vw;
+}
+
+/* -- Details / Colors shared card + caption -- */
+.static-card {
   border-radius: 4vw;
   overflow: hidden;
   position: relative;
-  min-height: 60vw;
+  min-height: 100vw;
+}
+.static-cards {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4vw;
+}
+.static-details__caption,
+.static-colors__caption {
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  white-space: normal;
+  text-align: center;
+  max-width: 82%;
+}
+.static-colors__card {
+  border-radius: 14vw;
+  min-height: 115vw;
 }

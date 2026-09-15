@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_layout_text_links",
+  "info": {
+    "displayName": "Text Link",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true
+    },
+    "external": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

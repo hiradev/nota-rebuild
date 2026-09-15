@@ -1,8 +1,4 @@
-/**
- * The venetian-blind reveal used in "Inside the box": 25 equal-height
- * white slats layered over a background image, each collapsing from
- * full height to zero (staggered) to reveal the photo beneath.
- */
+/** Venetian-blind reveal: 25 white slats collapsing (staggered) to reveal the photo beneath. */
 export default function Blinds() {
   return (
     <div className="inside__blinds-blinds" aria-hidden="true">

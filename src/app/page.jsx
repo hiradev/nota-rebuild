@@ -1,4 +1,5 @@
 import SmoothScroll from "@/lib/SmoothScroll";
+import { getHeader, getFooter, getHomepage } from "@/lib/strapi";
 import Header from "@/components/Header";
 import Preloader from "@/components/Preloader";
 import Cover from "@/components/Cover";
@@ -14,32 +15,42 @@ import Colors from "@/components/Colors";
 import Footer from "@/components/Footer";
 import StaticExperience from "@/components/StaticExperience";
 
-export default function Home() {
+export default async function Home() {
+  // Fetched once and threaded into both the desktop tree and StaticExperience
+  // below, so mobile reads the same Strapi content instead of a hardcoded copy.
+  const [header, footer, homepage] = await Promise.all([
+    getHeader(),
+    getFooter(),
+    getHomepage(),
+  ]);
+
   return (
     <SmoothScroll>
-      <Header />
+      <Header data={header} />
       <Preloader />
 
-      {/* Desktop animated "camera" scroll experience — >=992px.
-          See globals.css .desktop-experience / .static-experience. */}
-      <main className="desktop-experience">
-        <div className="black-bg__wrapper">
-          <Cover />
-          <SpecsTransition />
-          <Specs />
-          <WhoTransition />
-          <Who />
+      <main>
+        {/* Desktop animated "camera" scroll experience — >=992px.
+            See globals.css .desktop-experience / .static-experience. */}
+        <div className="desktop-experience">
+          <div className="black-bg__wrapper">
+            <Cover data={homepage.hero} />
+            <SpecsTransition />
+            <Specs data={homepage.specs} />
+            <WhoTransition />
+            <Who data={homepage.who} />
+          </div>
+          <Paper data={homepage.paper} />
+          <InsideTransition />
+          <Inside data={homepage.inside} />
+          <Details data={homepage.details} />
+          <Colors data={homepage.colors} />
+          <Footer data={footer} nav={header.nav} />
         </div>
-        <Paper />
-        <InsideTransition />
-        <Inside />
-        <Details />
-        <Colors />
-        <Footer />
-      </main>
 
-      {/* Simplified static stack below the 991px hard fork. */}
-      <StaticExperience />
+        {/* Simplified static stack below the 991px hard fork. */}
+        <StaticExperience footer={footer} homepage={homepage} nav={header.nav} />
+      </main>
     </SmoothScroll>
   );
 }

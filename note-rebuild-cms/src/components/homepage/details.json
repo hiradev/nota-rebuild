@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_homepage_details",
+  "info": {
+    "displayName": "Details",
+    "icon": "picture"
+  },
+  "options": {},
+  "attributes": {
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "homepage.detail-card"
+    },
+    "backgroundVideo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["videos"]
+    }
+  }
+}

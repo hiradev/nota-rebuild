@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_homepage_audience_lines",
+  "info": {
+    "displayName": "Audience Line",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

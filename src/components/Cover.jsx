@@ -2,15 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { ensureGsap } from "@/lib/gsapSetup";
+import { strapiMediaUrl } from "@/lib/strapi";
 
-const LINE_1 = "Smart pen";
-const LINE_2 = "for real thinking";
-
-/** Scramble-reveal: characters cycle through random glyphs before
- * settling on the final text. Plays once on mount (matches the live
- * site's decode-in effect) rather than scrubbing with scroll position —
- * scroll-linked reveal left the headline stuck mid-scramble whenever the
- * page wasn't at the very top. */
+/** Scramble-reveal, plays once on mount — scroll-linked reveal left the
+ * headline stuck mid-scramble whenever the page wasn't at the very top. */
 function useScramble(ref, text, delay = 0) {
   useEffect(() => {
     if (!ref.current) return;
@@ -44,7 +39,11 @@ function useScramble(ref, text, delay = 0) {
   }, [ref, text, delay]);
 }
 
-export default function Cover() {
+export default function Cover({ data }) {
+  const line1 = data?.headlineLine1 || "";
+  const line2 = data?.headlineLine2 || "";
+  const lottieUrl = strapiMediaUrl(data?.lottieAnimation) || "/lottie/cover.json";
+
   const sectionRef = useRef(null);
   const cameraRef = useRef(null);
   const lottieWrapRef = useRef(null);
@@ -52,8 +51,8 @@ export default function Cover() {
   const line1Ref = useRef(null);
   const line2Ref = useRef(null);
 
-  useScramble(line1Ref, LINE_1, 0);
-  useScramble(line2Ref, LINE_2, 0.15);
+  useScramble(line1Ref, line1, 0);
+  useScramble(line2Ref, line2, 0.15);
 
   useEffect(() => {
     const { gsap, ScrollTrigger } = ensureGsap();
@@ -77,12 +76,8 @@ export default function Cover() {
       );
     }, sectionRef);
 
-    // Scrub the Lottie "turntable" render by seeking its frame to
-    // scroll progress through the hero track. Uses lottie-web's
-    // loadAnimation/goToAndStop directly rather than the <lottie-player>
-    // custom element — that element's "ready" event is a race against
-    // ScrollTrigger's first onUpdate, and losing that race left the
-    // player permanently un-seeked (which reads as a dead/black hero).
+    // Uses lottie-web's loadAnimation/goToAndStop directly, not <lottie-player> —
+    // that element's "ready" event race with ScrollTrigger left it un-seeked.
     let anim;
     let totalFrames = 0;
     let st;
@@ -95,7 +90,7 @@ export default function Cover() {
         renderer: "svg",
         loop: false,
         autoplay: false,
-        path: "/lottie/cover.json",
+        path: lottieUrl,
       });
       anim.addEventListener("DOMLoaded", () => {
         totalFrames = anim.totalFrames;
@@ -126,21 +121,21 @@ export default function Cover() {
   }, []);
 
   return (
-    <section className="cover" ref={sectionRef}>
+    <section className="cover" ref={sectionRef} data-header-theme="dark">
       <div className="cover__camera" ref={cameraRef}>
         <div className="cover__lottie-pen" ref={lottieWrapRef}>
           <div ref={lottieContainerRef} className="cover__lottie-canvas" />
         </div>
         <div className="cover__wrapper">
           <div className="cover__headline-wrapper">
-            <h1 className="headline--1 tc--main-white" aria-label={LINE_1}>
+            <h1 className="headline--1 tc--main-white" aria-label={line1}>
               <span ref={line1Ref} aria-hidden="true">
-                {LINE_1}
+                {line1}
               </span>
             </h1>
-            <h1 className="headline--1 tc--main-white" aria-label={LINE_2}>
+            <h1 className="headline--1 tc--main-white" aria-label={line2}>
               <span ref={line2Ref} aria-hidden="true">
-                {LINE_2}
+                {line2}
               </span>
             </h1>
           </div>

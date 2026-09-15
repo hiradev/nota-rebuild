@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { ensureGsap } from "@/lib/gsapSetup";
+import { strapiMediaUrl } from "@/lib/strapi";
 import { ImagePlaceholder } from "./Placeholder";
 
-function RevealCard({ className, label, caption }) {
+function RevealCard({ className, label, caption, image }) {
   const imgRef = useRef(null);
   const rootRef = useRef(null);
 
@@ -31,24 +33,49 @@ function RevealCard({ className, label, caption }) {
   }, []);
 
   return (
-    <div className={`details__card ${className}`} ref={rootRef}>
+    <article className={`details__card ${className}`} ref={rootRef}>
       <div ref={imgRef} style={{ position: "absolute", inset: 0 }}>
-        <ImagePlaceholder
-          label={label}
-          className="details__card-image-placeholder"
-          style={{ width: "100%", height: "100%" }}
-        />
+        {image ? (
+          <Image
+            src={image}
+            alt={caption || label}
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="50vw"
+          />
+        ) : (
+          <ImagePlaceholder
+            label={label}
+            className="details__card-image-placeholder"
+            style={{ width: "100%", height: "100%" }}
+          />
+        )}
       </div>
-      {caption && (
+      {caption?.trim() && (
         <div className="details__text-wrapper bc--black-30">
           <span className="headline--4 tc--main-white">{caption}</span>
         </div>
       )}
-    </div>
+    </article>
   );
 }
 
-export default function Details() {
+const CARD_LAYOUT_CLASSES = [
+  "details__card--tall",
+  "details__card--pill-sm",
+  "details__card--right",
+  "details__card--top-large",
+  "details__card--top-pill",
+];
+
+export default function Details({ data }) {
+  const cards = (data?.cards || []).map((card, i) => ({
+    ...card,
+    image: strapiMediaUrl(card.image),
+    className: CARD_LAYOUT_CLASSES[i] || "",
+  }));
+  const videoUrl = strapiMediaUrl(data?.backgroundVideo) || "/video/details-video.mp4";
+
   const videoRef = useRef(null);
   const videoWrapRef = useRef(null);
 
@@ -73,28 +100,18 @@ export default function Details() {
     return () => ctx.revert();
   }, []);
 
+  const [card1, card2, card3, card4, card5] = cards;
+
   return (
-    <section className="details">
+    <section className="details" data-header-theme="light">
       <div className="container--primary">
         <div className="details__wrapper">
           <div className="details__content-wrapper--center">
             <div className="details__cards-wrapper">
-              <RevealCard
-                className="details__card--tall"
-                label="Pen on desk, top-down"
-                caption="Flush-fit precision cap"
-              />
-              <RevealCard
-                className="details__card--pill-sm"
-                label="Nib close-up"
-                caption="Durable metal nib, low-profile control button"
-              />
+              {card1 ? <RevealCard {...card1} label={card1.caption} /> : null}
+              {card2 ? <RevealCard {...card2} label={card2.caption} /> : null}
             </div>
-            <RevealCard
-              className="details__card--right"
-              label="USB-C adapter, macro"
-              caption="USB-C adapter — fast charging"
-            />
+            {card3 ? <RevealCard {...card3} label={card3.caption} /> : null}
           </div>
 
           <div className="details__video-wrapper" ref={videoWrapRef}>
@@ -102,7 +119,7 @@ export default function Details() {
               <video
                 className="details__video-placeholder"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                src="/video/details-video.mp4"
+                src={videoUrl}
                 muted
                 loop
                 autoPlay
@@ -113,16 +130,8 @@ export default function Details() {
           </div>
 
           <div className="details__content-wrapper--top">
-            <RevealCard
-              className="details__card--top-large"
-              label="Pen body macro"
-              caption="Aluminum body"
-            />
-            <RevealCard
-              className="details__card--top-pill"
-              label="Cap detail"
-              caption="Bluetooth connectivity, up to 8 hours of active use"
-            />
+            {card4 ? <RevealCard {...card4} label={card4.caption} /> : null}
+            {card5 ? <RevealCard {...card5} label={card5.caption} /> : null}
           </div>
         </div>
       </div>

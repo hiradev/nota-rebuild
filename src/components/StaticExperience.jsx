@@ -1,130 +1,241 @@
 import Image from "next/image";
+import { strapiMediaUrl } from "@/lib/strapi";
 import { ImagePlaceholder } from "./Placeholder";
+import Footer from "./Footer";
 
 /**
- * Below the spec's 991px hard fork, the animated desktop experience is
- * replaced entirely by a static, non-scrubbed stack (per section 3:
- * "the entire animated desktop experience is display:none below it and
- * a completely separate set of --static sections takes over"). This is
- * a simplified content-complete version of that static stack — no
- * camera/scrub choreography, just the same copy laid out to read well
- * on a phone or tablet.
+ * Below the 991px hard fork: a simplified static stack, no camera/scrub.
+ * Reads the same data page.jsx fetched for desktop — never hardcode a second copy.
  */
-export default function StaticExperience() {
+export default function StaticExperience({ footer, homepage, nav }) {
+  const hero = homepage?.hero || {};
+  const specs = homepage?.specs || {};
+  const who = homepage?.who || {};
+  const paper = homepage?.paper || {};
+  const inside = homepage?.inside || {};
+  const details = homepage?.details || {};
+  const colors = homepage?.colors || {};
+
+  const specsPenImageUrl = strapiMediaUrl(specs.penImage) || "/images/specs-pen.png";
+  const whoVideoUrl = strapiMediaUrl(who.backgroundVideo) || "/video/who-video.mp4";
+  const [kit, pen, adapter] = inside.blinds || [];
+
   return (
-    <main className="static-experience">
-      <section className="static-hero">
-        <h1 className="headline--1 tc--main-white">Smart pen</h1>
-        <h1 className="headline--1 tc--main-white">for real thinking</h1>
-      </section>
-
-      <section className="static-black">
-        <h2 className="headline--1 tc--gray">Nota pen</h2>
-        <h2 className="headline--1 tc--main-white">Specifications</h2>
-        <div className="static-cards">
-          {[
-            "Writing System",
-            "Capture Technology",
-            "Digital Continuity",
-          ].map((title) => (
-            <div
-              className="static-card border-radius--spec-card bc--black-2"
-              key={title}
-            >
-              <h3 className="headline--3 tc--main-white">{title}</h3>
-            </div>
-          ))}
+    <div className="static-experience">
+      <section className="static-hero" data-header-theme="dark">
+        <div className="static-hero__media">
+          <Image
+            src="/images/hero-pen.webp"
+            alt=""
+            fill
+            style={{ objectFit: "contain" }}
+            sizes="100vw"
+            priority
+          />
         </div>
+        <h1 className="headline--1 tc--main-white">
+          {hero.headlineLine2 || hero.headlineLine1}
+        </h1>
       </section>
 
-      <section className="static-black">
-        <span className="descriptor tc--main-white-40">Who it&apos;s for:</span>
-        <h2 className="large-text--1 tc--main-white">
-          A pen for people who think best with ink, not a keyboard.
-        </h2>
-        <div className="static-cards">
-          {[
-            ["Students & Learners", "Lecture notes that transcribe themselves."],
-            [
-              "Creators, Designers & Architects",
-              "Sketches captured at full fidelity.",
-            ],
-            [
-              "Managers & Product Thinkers",
-              "Meeting notes that sync the moment the pen leaves the page.",
-            ],
-          ].map(([title, body]) => (
-            <div key={title}>
-              <h3 className="headline--3 tc--main-white">{title}</h3>
-              <p className="main-text tc--main-white-40">{body}</p>
-            </div>
-          ))}
+      <section className="static-white" data-header-theme="light">
+        <h2 className="headline--1 tc--gray">{specs.headingLine1}</h2>
+        <h2 className="headline--1 tc--main-black">{specs.headingLine2}</h2>
+        <div className="static-specs__pen">
+          <Image
+            src={specsPenImageUrl}
+            alt="Nota pen"
+            width={800}
+            height={252}
+            sizes="100vw"
+            style={{ width: "100%", height: "auto" }}
+          />
         </div>
-      </section>
-
-      <section className="static-black">
-        <h2 className="headline--2 tc--main-white">Works with smart paper</h2>
-        <div className="static-cards">
-          {[
-            ["Special paper", "For the pen, it's a precise map.", "/images/paper-slide-1.webp"],
-            ["Looks like paper", "For you, it's just a blank sheet.", "/images/paper-slide-2.webp"],
-            ["No delays, no glitches", "AI-powered structure.", "/images/paper-slide-3.webp"],
-            ["Real-time sync", "Your notes. Already there.", "/images/paper-slide-4.webp"],
-          ].map(([heading, body, image]) => (
-            <div
-              className="static-card"
-              key={heading}
-              style={{ padding: "6vw", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}
-            >
-              <Image
-                src={image}
-                alt={heading}
-                fill
-                style={{ objectFit: "cover" }}
-                sizes="100vw"
-              />
-              <div style={{ position: "relative" }}>
-                <h3 className="headline--3 tc--main-white">{heading}</h3>
-                <p className="main-text tc--main-white">{body}</p>
+        <ul className="specs-pack__list">
+          {(specs.cards || []).map((card) => (
+            <li className="specs-list__card" key={card.title}>
+              <div className="specs-card__top-content effect--glass-specs">
+                <h3 className="headline--3 tc--main-black">{card.title}</h3>
               </div>
-            </div>
+              <div className="specs-card__bottom-content effect--glass-specs">
+                {(card.lines || []).map((line, i, arr) => (
+                  <div
+                    className={`specs-card__bottom-info${
+                      i === arr.length - 1 ? " specs-card__bottom-info--last" : ""
+                    }`}
+                    key={line.text}
+                  >
+                    <div className="specs-card__bottom-wrapper">
+                      <span className="card-text tc--main-black">{line.text}</span>
+                      <span className="specs-card__bottom-dot bc--black-20" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </li>
           ))}
+        </ul>
+      </section>
+
+      <section className="static-black" data-header-theme="dark">
+        <p className="large-text--1 tc--main-white">{who.introText}</p>
+
+        {who.audienceLabel || (who.audienceLines || []).length ? (
+          <div className="static-who__audience">
+            <span className="descriptor tc--main-white-40">{who.audienceLabel}</span>
+            <div className="static-who__audience-lines">
+              {(who.audienceLines || []).map((line) => (
+                <span className="large-text--2 tc--main-white" key={line.text}>
+                  {line.text}
+                </span>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        <div className="static-who__theses">
+          {(who.theses || []).map((thesis) => (
+            <article key={thesis.title}>
+              <h3 className="headline--3 tc--main-white">{thesis.title}</h3>
+              <p className="main-text tc--main-white-40">{thesis.body}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="static-who__media">
+          <video src={whoVideoUrl} muted playsInline autoPlay loop preload="metadata" />
         </div>
       </section>
 
-      <section className="static-white">
-        <h2 className="headline--2 tc--main-black">Inside the box</h2>
-        <div className="static-cards">
-          {[
-            ["Smart Pen", "Machined aluminum body, durable metal nib."],
-            ["Charging Adapter", "USB-C fast charge."],
-          ].map(([title, body]) => (
-            <div key={title}>
-              <h3 className="headline--3 tc--main-black">{title}</h3>
-              <p className="main-text tc--gray">{body}</p>
-            </div>
+      <section className="static-white" data-header-theme="light">
+        <h2 className="headline--2 tc--gray">{paper.coverHeadlineLine1}</h2>
+        <h2 className="headline--2 tc--main-black">{paper.coverHeadlineLine2}</h2>
+
+        <div className="static-paper__slides">
+          {(paper.slides || []).map((slide) => {
+            const imageUrl = strapiMediaUrl(slide.image);
+            return (
+              <article className="static-paper__slide" key={slide.heading}>
+                {imageUrl ? (
+                  <Image
+                    src={imageUrl}
+                    alt={slide.heading}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="100vw"
+                  />
+                ) : null}
+                <div className="paper__slide-container">
+                  <h3 className="paper__heading large-text--1 tc--main-white">
+                    {slide.heading}
+                  </h3>
+                  <div className="paper__description">
+                    <div className="paper__plate">
+                      <h4 className="headline--3 tc--main-white">{slide.body}</h4>
+                    </div>
+                    {slide.description ? (
+                      <div className="paper__plate">
+                        <p className="main-text tc--main-white">{slide.description}</p>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        <ul className="paper__pagination static-paper__pagination">
+          {(paper.slides || []).map((slide, i) => (
+            <li
+              className={`paper__pagination-item${i === 0 ? " paper__pagination-item--active" : ""}`}
+              key={slide.heading}
+            />
           ))}
+        </ul>
+      </section>
+
+      <section className="static-white" data-header-theme="light">
+        {kit ? (
+          <div className="static-inside__kit">
+            <h3 className="headline--3 tc--main-black">{kit.title}</h3>
+            <p className="main-text tc--gray">{kit.body}</p>
+            <div className="static-inside__media">
+              {strapiMediaUrl(kit.image) ? (
+                <Image
+                  src={strapiMediaUrl(kit.image)}
+                  alt={kit.title}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="100vw"
+                />
+              ) : (
+                <ImagePlaceholder label={kit.title} style={{ position: "absolute", inset: 0 }} />
+              )}
+            </div>
+          </div>
+        ) : null}
+
+        {inside.tagline ? (
+          <p className="large-text--1 tc--main-black static-inside__tagline">
+            {inside.tagline}
+          </p>
+        ) : null}
+
+        <div className="static-inside__devices">
+          {[pen, adapter].filter(Boolean).map((device) => {
+            const imageUrl = strapiMediaUrl(device.image);
+            return (
+              <div key={device.title} className="static-inside__device">
+                <h3 className="headline--3 tc--main-black">{device.title}</h3>
+                <p className="main-text tc--gray">{device.body}</p>
+                <div className="static-inside__media">
+                  {imageUrl ? (
+                    <Image
+                      src={imageUrl}
+                      alt={device.title}
+                      fill
+                      style={{ objectFit: "cover" }}
+                      sizes="100vw"
+                    />
+                  ) : (
+                    <ImagePlaceholder label={device.title} style={{ position: "absolute", inset: 0 }} />
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 
-      <section className="static-black">
+      <section className="static-white" data-header-theme="light">
         <div className="static-cards">
-          {[
-            "Flush-fit precision cap",
-            "Refined colors. Personal expression",
-            "Durable metal nib, low-profile control button",
-            "Aluminum body",
-          ].map((caption) => (
-            <div className="static-card" key={caption}>
-              <ImagePlaceholder
-                label={caption}
-                style={{ position: "absolute", inset: 0 }}
-              />
-            </div>
-          ))}
+          {(details.cards || []).map((card, i) => {
+            const imageUrl = strapiMediaUrl(card.image);
+            return (
+              <div className="static-card" key={i}>
+                {imageUrl ? (
+                  <Image
+                    src={imageUrl}
+                    alt={card.caption || ""}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="100vw"
+                  />
+                ) : (
+                  <ImagePlaceholder label={card.caption} style={{ position: "absolute", inset: 0 }} />
+                )}
+                {card.caption?.trim() ? (
+                  <div className="details__text-wrapper static-details__caption bc--black-30">
+                    <span className="headline--4 tc--main-white">{card.caption}</span>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
           <div className="static-card">
             <video
-              src="/video/details-video.mp4"
+              src={strapiMediaUrl(details.backgroundVideo) || "/video/details-video.mp4"}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
               muted
               loop
@@ -136,48 +247,33 @@ export default function StaticExperience() {
         </div>
       </section>
 
-      <section className="static-black">
-        <h2 className="headline--2 tc--main-white">Colors</h2>
+      <section className="static-black" data-header-theme="dark">
         <div className="static-cards">
-          {[
-            ["Silver", "Impossible to overthink", "/images/color-1.webp"],
-            ["Graphite Black", "Clarity in silence.", "/images/color-2.webp"],
-            ["Mist Blue", "Light thinking.", "/images/color-3.webp"],
-            ["Precision Red", "Form follows thought.", "/images/color-4.webp"],
-            ["Bright Orange", "Steady focus.", "/images/color-5.webp"],
-          ].map(([name, tagline, image]) => (
-            <div className="static-card" key={name}>
-              <Image
-                src={image}
-                alt={`Pen colorway — ${name}`}
-                fill
-                style={{ objectFit: "cover" }}
-                sizes="100vw"
-              />
-              <div
-                style={{
-                  position: "relative",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "flex-end",
-                  padding: "4vw",
-                }}
-              >
-                <p className="large-text--3 tc--main-white">{tagline}</p>
+          {(colors.slides || []).map((slide) => {
+            const imageUrl = strapiMediaUrl(slide.image);
+            return (
+              <div className="static-card static-colors__card" key={slide.taglineLine1}>
+                {imageUrl ? (
+                  <Image
+                    src={imageUrl}
+                    alt={`Pen colorway — ${slide.taglineLine1}`}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="100vw"
+                  />
+                ) : null}
+                <div className="details__text-wrapper static-colors__caption bc--black-30">
+                  <span className="headline--4 tc--main-white">
+                    {slide.taglineLine1} {slide.taglineLine2}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
-      <footer className="static-black" style={{ paddingBottom: "16vw" }}>
-        <p className="footer-text tc--main-white">
-          A pen for people who think in ink first, pixels second.
-        </p>
-        <p className="footer-title tc--main-white-50" style={{ marginTop: "4vw" }}>
-          © 2026 NŌTA. All rights reserved.
-        </p>
-      </footer>
-    </main>
+      <Footer data={footer} nav={nav} id="about-mobile" />
+    </div>
   );
 }

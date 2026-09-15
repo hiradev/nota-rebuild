@@ -1,0 +1,56 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepages",
+  "info": {
+    "singularName": "homepage",
+    "pluralName": "homepages",
+    "displayName": "Homepage",
+    "description": "The single-page marketing site's scrolling sections and page-level SEO"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "homepage.hero"
+    },
+    "specs": {
+      "type": "component",
+      "repeatable": false,
+      "component": "homepage.specs"
+    },
+    "who": {
+      "type": "component",
+      "repeatable": false,
+      "component": "homepage.who"
+    },
+    "paper": {
+      "type": "component",
+      "repeatable": false,
+      "component": "homepage.paper"
+    },
+    "inside": {
+      "type": "component",
+      "repeatable": false,
+      "component": "homepage.inside"
+    },
+    "details": {
+      "type": "component",
+      "repeatable": false,
+      "component": "homepage.details"
+    },
+    "colors": {
+      "type": "component",
+      "repeatable": false,
+      "component": "homepage.colors"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

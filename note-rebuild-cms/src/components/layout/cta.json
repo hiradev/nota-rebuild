@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_layout_ctas",
+  "info": {
+    "displayName": "CTA",
+    "icon": "cursor"
+  },
+  "options": {},
+  "attributes": {
+    "orderLabel": {
+      "type": "string",
+      "required": true
+    },
+    "productLabel": {
+      "type": "string",
+      "required": true
+    },
+    "price": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "waitlist_submissions",
+  "info": {
+    "singularName": "waitlist-submission",
+    "pluralName": "waitlist-submissions",
+    "displayName": "Waitlist Submission",
+    "description": "Emails collected from the homepage 'Stay ahead' waitlist form"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "honeypot": {
+      "type": "string",
+      "required": false
+    },
+    "source": {
+      "type": "string",
+      "required": false
+    }
+  }
+}

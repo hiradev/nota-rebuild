@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_homepage_spec_lines",
+  "info": {
+    "displayName": "Spec Line",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

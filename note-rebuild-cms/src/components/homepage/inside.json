@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_homepage_insides",
+  "info": {
+    "displayName": "Inside",
+    "icon": "box"
+  },
+  "options": {},
+  "attributes": {
+    "blinds": {
+      "type": "component",
+      "repeatable": true,
+      "component": "homepage.blind-item"
+    },
+    "tagline": {
+      "type": "text",
+      "required": true
+    }
+  }
+}
