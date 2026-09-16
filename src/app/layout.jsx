@@ -38,6 +38,9 @@ export async function generateMetadata() {
   // when an editor has filled it in; otherwise fall back to the site default.
   const seo = homepage?.seo?.metaTitle ? homepage.seo : global?.defaultSeo;
 
+  const faviconUrl = strapiMediaUrl(global?.favicon);
+  const icons = faviconUrl ? { icon: faviconUrl } : undefined;
+
   if (!seo) {
     const defaultSeo = global?.defaultSeo;
     return {
@@ -47,6 +50,7 @@ export async function generateMetadata() {
       keywords: defaultSeo?.keywords || undefined,
       alternates: defaultSeo?.canonicalURL ? { canonical: defaultSeo.canonicalURL } : undefined,
       robots: ROBOTS,
+      icons,
     };
   }
 
@@ -59,6 +63,7 @@ export async function generateMetadata() {
     keywords: seo.keywords || undefined,
     alternates: seo.canonicalURL ? { canonical: seo.canonicalURL } : undefined,
     robots: ROBOTS,
+    icons,
     openGraph: shareImageUrl
       ? { title: seo.metaTitle, description: seo.metaDescription, images: [shareImageUrl] }
       : undefined,
