@@ -9,6 +9,11 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Server =>
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
+  transfer: {
+    remote: {
+      enabled: env.bool('STRAPI_TRANSFER_REMOTE_ENABLED', false),
+    },
+  },
 });
 
 export default config;

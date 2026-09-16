@@ -11,9 +11,6 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Admin => 
     token: {
       salt: env('TRANSFER_TOKEN_SALT')!,
     },
-    remote: {
-      enabled: env.bool('STRAPI_TRANSFER_REMOTE_ENABLED', false),
-    },
   },
   secrets: {
     encryptionKey: env('ENCRYPTION_KEY')!,
